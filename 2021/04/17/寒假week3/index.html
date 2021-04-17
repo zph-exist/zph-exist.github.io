@@ -464,7 +464,182 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>t1</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<string><br>#include<cmath><br>#define INF 0x3f3f3f3f<br>#define LL long long<br>#define N 10100<br>using namespace std;</p>
+<p>string s[N],s1[N];<br>int dic = 0,need = 0;</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while( cin&gt;&gt;s[ ++dic ] )<br>    {<br>        if( s[dic]==”#” ) break;<br>    }<br>    while( cin&gt;&gt;s1[ ++need ] )<br>    {<br>        if( s1[need]==”#” ) break;<br>    }<br>    dic–;<br>    need–;<br>    for(int i=1;i&lt;=need;i++)<br>    {<br>        int pd = false;<br>        for(int j=1;j&lt;=dic;j++)<br>        {<br>            if( s[j] == s1[i] )<br>            {<br>                cout&lt;&lt;s1[i]&lt;&lt;” is correct”&lt;&lt;endl;<br>                pd = true;<br>                break;<br>            }<br>        }<br>        if( pd == true ) continue;<br>        int len = s1[i].size();<br>        cout&lt;&lt;s1[i]&lt;&lt;”:”;<br>        for(int j=1;j&lt;=dic;j++)<br>        {<br>            int len2 = s[j].size();<br>            if( len==len2 || len==len2+1 || len==len2-1 )<br>            {<br>                int ans = 0;<br>                if( len&gt;len2 )<br>                {<br>                    for(int m=0,d=0;m&lt;len;m++)<br>                    {<br>                        if( s1[i][m]==s[j][d] )<br>                        {<br>                            ans++;<br>                            d++;<br>                        }<br>                    }<br>                }<br>                else if( len&lt;len2 )<br>                {<br>                    for(int m=0,d=0;m&lt;len2;m++)<br>                    {<br>                        if( s[j][m]==s1[i][d] )<br>                        {<br>                            ans++;<br>                            d++;<br>                        }<br>                    }<br>                }<br>                else if( len==len2 )<br>                {<br>                    for(int m=0;m&lt;len;m++)<br>                    {<br>                        if( s[j][m]==s1[i][m] ) ans++;<br>                    }<br>                }</p>
+<pre><code>            if( len&gt;=len2 &amp;&amp; ans==len-1 ) cout&lt;&lt;&quot; &quot;&lt;&lt;s[j];
+            if( len&lt;len2 &amp;&amp; ans==len ) cout&lt;&lt;&quot; &quot;&lt;&lt;s[j];
+        &#125;
+    &#125;
+    cout&lt;&lt;endl;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t2</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<string><br>#define M 1010<br>using namespace std;</p>
+<p>int n,m,t,la,lb,N[M];<br>string str,s[12],a,b;</p>
+<p>void next()<br>{<br>    int j=-1;<br>    N[0] = -1;<br>    for(int i=1;i&lt;lb;i++)<br>    {<br>        while( b[j+1]!=b[i]&amp;&amp;j&gt;-1 )<br>        {<br>            j=N[j];<br>        }<br>        if( b[j+1]==b[i] ) j++;<br>        N[i] = j;<br>    }<br>}</p>
+<p>bool kmp()<br>{<br>    int j=-1;<br>    for(int i=0;i&lt;la;i++)<br>    {<br>        while( a[i]!=b[j+1]&amp;&amp;j&gt;-1 ) j = N[j];<br>        if( a[i]==b[j+1] )<br>        {<br>            j++;<br>            if( j==lb-1 ) return true;<br>        }<br>    }<br>    return false;<br>}</p>
+<p>int main()<br>{<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        cin&gt;&gt;n;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            cin&gt;&gt;s[i];<br>        }<br>        str = “no significant commonalities”;<br>        for(int k=3;k&lt;=60;k++)<br>        {<br>            for(int i=0;i&lt;=60-k;i++)<br>            {<br>                bool pd = false;<br>                b = s[1].substr(i,k);<br>                lb = b.size();<br>                next();<br>                for(int j=2;j&lt;=n;j++)<br>                {<br>                    a = s[j];<br>                    la = a.size();<br>                    if( kmp()==false )<br>                    {<br>                        pd = true;<br>                        break;<br>                    }<br>                }</p>
+<pre><code>            if( pd==false )
+            &#123;
+                if( str == &quot;no significant commonalities&quot; )
+                &#123;
+                    str = b;
+                &#125;
+                else if( str.size() &lt; b.size() )
+                &#123;
+                    str = b;
+                &#125;
+                else if( str.size() == b.size() )
+                &#123;
+                    str = min(str,b);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    cout&lt;&lt;str&lt;&lt;endl;
+&#125;
+
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t3</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<string><br>#define M 101000<br>using namespace std;</p>
+<p>string a,b;<br>int n,la,lb;</p>
+<p>int main()<br>{<br>    while( cin&gt;&gt;a&gt;&gt;b )<br>    {<br>        la = a.size();<br>        lb = b.size();<br>        int j = 0;<br>        for(int i=0;i&lt;lb;i++)<br>        {<br>            if( a[j]==b[i] )<br>            {<br>                j++;<br>                if( j==la ) break;<br>            }<br>        }<br>        if( j==la ) printf(“Yes\n”);<br>        else printf(“No\n”);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t4</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>using namespace std;<br>const int maxn = 3e6+10;</p>
+<p>int fa[maxn];<br>int cnt = 0;<br>int vis[maxn];<br>int tree[maxn][30];<br>int flag[maxn],tot=0;<br>char s1[100];<br>char s2[100];<br>int du[maxn];</p>
+<p>int find(int x)<br>{<br>    if( fa[x] == x ) return x;<br>    else return fa[x] = find( fa[x] );<br>}<br>int add(char *s)<br>{<br>    int len = strlen(s);<br>    int id,root=0;<br>    for(int i=0;i&lt;len;i++)<br>    {<br>        id = s[i]-‘a’;<br>        if( !tree[root][id] )<br>        {<br>            tot++;<br>            tree[root][id] = tot;<br>        }<br>        root = tree[root][id];<br>    }<br>    if( !flag[root] ) vis[root] = ++cnt;<br>    flag[root] = 1;<br>    return vis[root];<br>}<br>void merge(int x,int y)<br>{<br>    int fx = find(x),fy = find(y);<br>    if( fx!=fy )<br>    {<br>        fa[ fy ] = fx;<br>    }<br>    return ;<br>}<br>int main()<br>{<br>    for(int i=0;i&lt;maxn;i++) fa[i] = i;<br>    while( scanf(“%s %s”,s1,s2)!=EOF )<br>    {<br>        int a1 = add(s1);<br>        int a2 = add(s2);<br>        merge(a1,a2);<br>        du[a1]++;<br>        du[a2]++;<br>    }<br>    int flag = 1;<br>    int ss = find(1);<br>    int num = 0;<br>    for(int i=1;i&lt;=cnt;i++)<br>    {<br>        if( find(i)!=ss )<br>        {<br>            flag = 0;<br>            break;<br>        }<br>        if( du[i]&amp;1==1 ) num++;<br>        if( num&gt;2 )<br>        {<br>            flag = 0;<br>            break;<br>        }<br>    }<br>    if(flag == 0) puts(“Impossible”);<br>    else<br>    {<br>        if(num==0||num==2){<br>            puts(“Possible”);<br>        }else{<br>            puts(“Impossible”);<br>        }<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t5</p>
+<blockquote>
+<p>#include <iostream><br>#include <cstdlib><br>#include <cstdio><br>#include<cstring><br>#include <vector><br>#include <string><br>#include <sstream><br>using namespace std;<br>typedef long long ll;<br>int Prime = 999983,n,key;<br>int sum=0;<br>typedef struct node<br>{<br>    int data[6],next;<br>} node;<br>node e[100100];<br>node x;<br>//vector<node>num[999984];<br>int hash[999984];<br>bool flag = false ,judge;<br>int main()<br>{</p>
+<pre><code>scanf(&quot;%lld&quot;,&amp;n);
+memset(hash,-1,sizeof(hash));
+sum = 0;
+while(n--)
+&#123;
+    key = 0;
+    for(int i=0; i&lt;6; i++)
+    &#123;
+        int t;
+        scanf(&quot;%d&quot;,&amp;t);
+        key = ( key + t )%Prime;
+        x.data[i] = t;
+    &#125;
+    if(!flag)
+    &#123;
+</code></pre>
+<p>//            num[key].push_back(x);<br>//            int len = num[key].size();<br>            for(int i=hash[key];i!=-1; i=e[i].next)<br>            {<br>                node t=e[i];<br>                for(int j=0; j&lt;6; j++)<br>                {<br>                    judge = true;<br>                    for(int k=0; k&lt;6; k++)<br>                        if(t.data[k]!=x.data[(5-j-k+6)%6])<br>                        {<br>                            judge=false;<br>                            break;<br>                        }<br>                    if( judge == true )<br>                        flag = judge;<br>                }<br>                for(int j=0; j&lt;6; j++)<br>                {<br>                    judge = true;<br>                    for(int k=0; k&lt;6; k++)<br>                        if(t.data[k]!=x.data[(j+k)%6])<br>                        {<br>                            judge=false;<br>                            break;<br>                        }<br>                    if( judge )<br>                        flag = judge;<br>                }<br>            }</p>
+<pre><code>        sum++;
+        e[sum] = x;
+        e[ sum ].next = hash[key];
+        hash[key] = sum; 
+    &#125;
+&#125;
+if(flag)
+        cout&lt;&lt;&quot;Twin snowflakes found.&quot;&lt;&lt;endl;
+    else
+        cout&lt;&lt;&quot;No two snowflakes are alike.&quot;&lt;&lt;endl;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t6</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define MAX 100005<br>#define qwq 1000000<br>using namespace std;</p>
+<p>int hash[MAX*10],sum[MAX][35],c[MAX][35],n,k,x;<br>int HASH(int *cc)<br>{<br>    int j,key = 0;<br>    for(j=1;j&lt;k;j++)<br>    {<br>        key = key%qwq + cc[j]&lt;&lt;3;<br>    }<br>    key = abs(key)%qwq;<br>    return key;<br>}<br>int main()<br>{<br>    int maxlen=0;<br>    cin&gt;&gt;n&gt;&gt;k;<br>    memset(hash,-1,sizeof(hash));<br>    hash[0] = 0;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%d”,&amp;x);<br>        for(int j=0;j&lt;k;j++)<br>        {<br>            sum[i][j] = sum[i-1][j] + (x&amp;1);<br>            c[i][j] = sum[i][j] - sum[i][0];<br>            x&gt;&gt;=1;<br>        }<br>        int key = HASH(c[i]);<br>        while( hash[key]!=-1 )<br>        {<br>            int j;<br>            for(j=0;j&lt;k;j++)<br>            {<br>                if( c[i][j]!=c[hash[key]][j] ) break;<br>            }<br>            if( j==k &amp;&amp; maxlen&lt;(i-hash[key]) )<br>            {<br>                maxlen = i-hash[key];<br>                break;<br>            }<br>            key++;<br>        }<br>        if( hash[key]==-1 ) hash[key] = i;<br>    }<br>    printf(“%d\n”,maxlen);<br>    return 0;<br>}</p>
+</blockquote>
+<p>t7</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>using namespace std;</p>
+<p>int m,n,t;<br>double dp[1010][40][40],s[1010][40],p[1010][40];</p>
+<p>int main()<br>{<br>    while( scanf(“%d %d %d”,&amp;m,&amp;t,&amp;n) )<br>    {<br>        if( m==0&amp;&amp;n==0&amp;&amp;t==0 ) break;</p>
+<pre><code>    memset(dp,0,sizeof(dp));;
+    memset(s,0,sizeof(s));
+    for(int i=1;i&lt;=t;i++)
+    &#123;
+        for(int j=1;j&lt;=m;j++)
+        &#123;
+            scanf(&quot;%lf&quot;,&amp;p[i][j]);
+        &#125;
+    &#125;
+    for(int i=1;i&lt;=t;i++)
+    &#123;
+        dp[i][0][0] = 1.0;
+        for(int j=1;j&lt;=m;j++)
+        &#123;
+            dp[i][j][0] = dp[i][j-1][0]* ( 1-p[i][j] );
+        &#125;
+        for(int j=1;j&lt;=m;j++)
+        &#123;
+            for(int k=1;k&lt;=j;k++)
+            &#123;
+                dp[i][j][k] = dp[i][j-1][k-1]*p[i][j] + dp[i][j-1][k]*(1-p[i][j]);
+            &#125;
+        &#125;
+        s[i][0] = dp[i][m][0];
+        for(int j=1;j&lt;=m;j++)
+        &#123;
+            s[i][j] = s[i][j-1] + dp[i][m][j];
+        &#125;
+    &#125;
+    double p1=1.0,p2=1.0;
+    for(int i=1;i&lt;=t;i++)
+    &#123;
+        p1 *= ( s[i][m] - s[i][0] );
+        p2 *= ( s[i][n-1] - s[i][0] );
+    &#125;
+    printf(&quot;%.3lf\n&quot;,p1-p2);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t8</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<cmath><br>#include<algorithm><br>#define M 25000000<br>#define LL long long<br>using namespace std;</p>
+<p>short hash[M+10];</p>
+<p>int a,b,c,d,e,x1,x2,x3,sum,ans = 0;</p>
+<p>int main()<br>{<br>    while( scanf(“%d %d %d %d %d”,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e)!=EOF )<br>    {<br>        memset(hash,0,sizeof(hash));<br>        for(int i=-50;i&lt;=50;i++)<br>        {<br>            if( i==0 ) continue;<br>            for(int j=-50;j&lt;=50;j++)<br>            {<br>                if( j==0 ) continue;<br>                sum = a<em>i</em>i<em>i + b</em>j<em>j</em>j;<br>                sum *=-1;<br>                if( sum&lt;0 ) sum+=M;<br>                hash[sum]++;</p>
+<pre><code>        &#125;
+    &#125;
+    for(int i=-50;i&lt;=50;i++)
+    &#123;
+        if( i==0 ) continue;
+        for(int j=-50;j&lt;=50;j++)
+        &#123;
+            if( j==0 ) continue;
+            for(int k=-50;k&lt;=50;k++)
+            &#123;
+                if( k==0 ) continue;
+                sum = c*i*i*i + d*j*j*j + e*k*k*k;
+                if( sum&lt;0 ) sum+=M;
+                if( hash[sum] )ans += hash[sum];
+            &#125;
+        &#125;
+    &#125;
+    printf(&quot;%d\n&quot;,ans);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+
                 
             </div>
             <hr/>

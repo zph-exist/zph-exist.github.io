@@ -464,7 +464,43 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>T1</p>
+<blockquote>
+<p>#include&lt;bits/stdc++.h&gt;<br>#define LL long long<br>using namespace std;</p>
+<p>const int maxn = 400000 + 10;<br>LL a[maxn],g,ans=0,n;<br>LL gcd(LL a,LL b)<br>{<br>    if(b==0) return a;<br>    else return gcd(b,a%b);<br>}<br>int main()<br>{<br>    while(cin&gt;&gt;n)<br>    {<br>        for(LL i=1;i&lt;=n;i++)<br>        {<br>            cin&gt;&gt;a[i];<br>        }<br>        g = a[1];<br>        for(LL i=2;i&lt;=n;i++)<br>        {<br>            g = gcd( g , a[i] );<br>        }<br>        for(LL i=1;i<em>i&lt;=g;i++)<br>        {<br>            if(g % i == 0)<br>            {<br>                if(i</em>i != g) ans += 2;<br>                else ans++;<br>            }<br>        }<br>        cout&lt;&lt;ans;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T2</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>using namespace std;<br>long long x,y,n;//最好定全局变量<br>void exgcd(long long a,long long b)<br>{<br>    if(b==0) //当b=0时就是遇到了特解，可以递归回去算答案了<br>    {<br>        x=1,y=0;<br>        return ;<br>    }<br>    exgcd(b,a%b);<br>    long long k;<br>    k=x;<br>    x=y;<br>    y=k-(a/b)*y;<br>}<br>int main()<br>{<br>    long long a,p;<br>    scanf(“%d%lld”,&amp;a,&amp;p);<br>    exgcd(a,p);<br>    cout&lt;&lt;(x%p+p)%p;<br>    return 0;<br>}</p>
+</blockquote>
+<p>T3</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<iomanip><br>#define LL long long<br>using namespace std;<br>LL x,y,k,t,c;<br>LL xx,yy,n,m;<br>LL gcd(LL a,LL b)<br>{<br>    if(b==0) return a;<br>    else return gcd(b,a%b);<br>}<br>void exgcd(LL a,LL b)<br>{<br>    if(!b)<br>    {<br>        x=1;<br>        y=0;<br>        return;<br>    }<br>    exgcd(b,a%b);<br>    k = x;<br>    x = y;<br>    y = k - (a/b)*y;<br>    return ;<br>}<br>LL a,b,l,g;<br>int main()<br>{<br>    cin&gt;&gt;xx&gt;&gt;yy&gt;&gt;m&gt;&gt;n&gt;&gt;l;<br>    a = m-n;<br>    b = l;<br>    c = yy-xx;<br>    if(a&lt;0)<br>    {<br>        a=-a;<br>        c=-c;<br>    }<br>    g = gcd(a,b);<br>    if( c%g!=0 )<br>    {<br>        cout&lt;&lt;”Impossible”&lt;&lt;endl;<br>    }<br>    else<br>    {<br>        exgcd(a,b);</p>
+<pre><code>    x*=c/g;
+    b;
+    x = (x%b+b)%b;
+    cout&lt;&lt;x;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T4</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>using namespace std;<br>long long x,y,n,f[3000010];<br>void work(long long n,long long p)//线性求逆元，时间复杂度O(n)<br>{<br>    f[1]=1;<br>    for(long long i=2;i&lt;=n;i++)<br>    {<br>        f[i]=-(p/i)*f[p%i];<br>        f[i]=(f[i]%p+p)%p;<br>    }<br>}<br>int main()<br>{<br>    long long a,p,b,n,i;<br>    cin&gt;&gt;n&gt;&gt;p;<br>    work(n,p);<br>    for(long long i=1;i&lt;=n;i++)<br>    {<br>        printf(“%lld\n”,f[i]);//处理出   最小正整数！！<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T5</p>
+<blockquote>
+<p>#include&lt;bits/stdc++.h&gt;<br>#define LL long long<br>using namespace std;<br>LL n,m,ans,x,g;<br>LL Getphi(LL x)<br>{<br>    ans = x;<br>    for(LL i=2;i<em>i&lt;=x;i++)<br>    {<br>        if(x%i==0)<br>        {<br>            ans = ans*(i-1) / i;<br>            while(x%i==0) x /= i;<br>        }<br>    }<br>    if(x&gt;1) ans = ans</em>(x-1) / x;<br>    return ans;<br>}<br>int main()<br>{<br>    while(cin&gt;&gt;n)<br>    {<br>        if(n==0) break;<br>        g = Getphi(n);<br>        cout&lt;&lt;n-g-1&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T6</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<cmath><br>#include<algorithm><br>#include<stack><br>#include<queue><br>#include<iomanip><br>#include<map><br>#include<string><br>#define LL long long<br>using namespace std;<br>const LL M = 1010;<br>LL pr[M],phi[M],sum=0,ans;<br>bool pd[M]={false};<br>LL n,m;<br>void getphi()<br>{<br>    phi[1]=1;<br>    for(int i=2;i&lt;=M;i++)<br>    {<br>        if(pd[i]==false)<br>        {<br>            sum++;<br>            pr[sum]  = i;<br>            phi[i] = i-1;<br>        }<br>        for(int j=1;i<em>pr[j]&lt;M&amp;&amp;j&lt;=sum;j++)<br>        {<br>            pd[ i*pr[j] ] = true;<br>            if(i%pr[j]==0)<br>            {<br>                phi[ i*pr[j] ] = phi[i] * pr[j] ;<br>                break;<br>            }<br>            else<br>            {<br>                phi[ i*pr[j] ] = phi[i] * phi[ pr[j] ];<br>            }<br>        }<br>    }<br>}<br>int main()<br>{<br>    cin&gt;&gt;n;<br>    LL t=0;<br>    getphi();<br>    while(n)<br>    {<br>        t++;<br>        ans = 0;<br>        scanf(“%lld”,&amp;m);<br>        for(LL i=2;i&lt;=m;i++)<br>        {<br>            ans += phi[i];<br>        }<br>        printf(“%lld %lld %lld\n”,t,m,ans</em>2+3);<br>        n–;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+
                 
             </div>
             <hr/>

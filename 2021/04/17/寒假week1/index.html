@@ -464,7 +464,199 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>T1:</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<queue><br>#include<vector><br>using namespace std;</p>
+<p>int n,a[51000],x,y;<br>long long ans=0;<br>priority_queue&lt;int ,vector<int>, greater<int> &gt;q;</p>
+<p>int main()<br>{<br>    cin&gt;&gt;n;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%d”,&amp;a[i]);<br>        q.push(a[i]);<br>    }<br>    while(q.size()&gt;=2)<br>    {<br>        x = q.top();<br>        q.pop();<br>        y = q.top();<br>        q.pop();<br>        ans += (x+y);<br>        q.push(x+y);<br>    }<br>    printf(“%lld\n”,ans);<br>    return 0;<br>}</p>
+</blockquote>
+<p>T2</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define LL long long<br>#define N 100000<br>using namespace std;</p>
+<p>int n,m,a[N],l,r;<br>struct node<br>{<br>    int l,r,maxx,minn;<br>}t[4*N];<br>void build(int p,int l,int r)<br>{<br>    t[p].l = l;<br>    t[p].r = r;<br>    int mid = (l+r)&gt;&gt;1;<br>    int ls = p&lt;&lt;1;<br>    int rs = p&lt;&lt;1|1;<br>    if(l!=r)<br>    {<br>        build(ls,l,mid);<br>        build(rs,mid+1,r);<br>        t[p].maxx = max( t[ls].maxx , t[rs].maxx );<br>        t[p].minn = min( t[ls].minn , t[rs].minn );<br>    }<br>    else<br>    {<br>        t[p].maxx = a[l];<br>        t[p].minn = a[l];<br>    }<br>}<br>int findmax(int p,int l,int r)<br>{<br>    int mid = (t[p].l+t[p].r)&gt;&gt;1,ls = p&lt;&lt;1,rs = p&lt;&lt;1|1;<br>    if( t[p].l==l &amp;&amp; t[p].r==r ) return t[p].maxx;<br>    if(r&lt;=mid) return findmax(ls,l,r);<br>    else if(l&gt;mid) return findmax(rs,l,r);<br>    else<br>    {<br>        return max( findmax(ls,l,mid) , findmax(rs,mid+1,r) );<br>    }<br>}<br>int findmin(int p,int l,int r)<br>{<br>    int mid = (t[p].l+t[p].r)&gt;&gt;1,ls=p&lt;&lt;1,rs=p&lt;&lt;1|1;<br>    if( t[p].l==l&amp;&amp;t[p].r==r ) return t[p].minn;<br>    if(r&lt;=mid) return findmin(ls,l,r);<br>    else if(l&gt;mid) return findmin(rs,l,r);<br>    else<br>    {<br>        return min( findmin(ls,l,mid) , findmin(rs,mid+1,r) );<br>    }<br>}</p>
+<p>int main()<br>{</p>
+<pre><code>cin&gt;&gt;n&gt;&gt;m;
+for(int i=1;i&lt;=n;i++)
+&#123;
+    scanf(&quot;%d&quot;,&amp;a[i]);
+&#125;
+build(1,1,n);
+for(int i=1;i&lt;=m;i++)
+&#123;
+    scanf(&quot;%d %d&quot;,&amp;l,&amp;r);
+    cout&lt;&lt;findmax(1,l,r)-findmin(1,l,r)&lt;&lt;endl;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T3</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define N 2100<br>using namespace std;</p>
+<p>int p,n,m,x,y;<br>int a,b,fa[2*N],sum=0;<br>int find(int i)<br>{<br>    if( fa[i]==i ) return i;<br>    else return fa[i] = find( fa[i] );<br>}</p>
+<p>int main()<br>{<br>    cin&gt;&gt;p;<br>    while(p–)<br>    {<br>        sum++;<br>        bool pd = true;<br>        scanf(“%d %d”,&amp;n,&amp;m);<br>        printf(“Scenario #%d:\n”,sum);<br>        for(int i=1;i&lt;=2*n;i++) fa[i] = i;<br>        for(int i=1;i&lt;=m;i++)<br>        {<br>            scanf(“%d %d”,&amp;a,&amp;b);<br>            x = find(a);<br>            y = find(b);<br>            if(x==y&amp;&amp;pd==true)<br>            {<br>                printf(“Suspicious bugs found!\n”);<br>                pd = false;<br>            }<br>            fa[x] = find(b+n);<br>            fa[y] = find(a+n);<br>        }<br>        if(pd) printf(“No suspicious bugs found!\n”);<br>        cout&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T4 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define LL long long<br>using namespace std;</p>
+<p>const int N = 10001;<br>struct node<br>{<br>    int from,to,val,next;<br>}e[N];<br>int t,n,m,head[N],sum = 0,x,y,ans,fa[N];<br>bool pd[N];<br>void add(int u,int v)<br>{<br>    sum++;<br>    e[sum].from = u;<br>    e[sum].to = v;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>}<br>int find(int x)<br>{<br>    if( fa[x]==x ) return x;<br>    else return fa[x] = find( fa[x] );<br>}<br>void tarjin(int u)<br>{<br>    pd[u] = true;<br>    for(int i=head[u];i;i=e[i].next)<br>    {<br>        int v = e[i].to;<br>        if( pd[v]==false )<br>        {<br>            tarjin(v);<br>            fa[v] = u;<br>        }<br>    }<br>    if( pd[x]==true&amp;&amp;pd[y]==true )<br>    {<br>        if(u==x)<br>        {<br>            ans = find(y);<br>        }<br>        else if(u==y)<br>        {<br>            ans = find(x);<br>        }<br>        return ;<br>    }<br>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    cin&gt;&gt;t;<br>    while(t)<br>    {<br>        int u,v;<br>        memset(head,0,sizeof(head));<br>        sum = 0;<br>        memset(pd,false,sizeof(pd));<br>        cin&gt;&gt;n;<br>        for(int i=1;i&lt;=n;i++) fa[i] = i;<br>        for(int i=1;i&lt;n;i++)<br>        {<br>            scanf(“%d %d”,&amp;u,&amp;v);<br>            fa[v] = find(u);<br>            add(u,v);<br>        }<br>        cin&gt;&gt;x&gt;&gt;y;<br>        int s = find(1);<br>        for(int i=1;i&lt;=n;i++) fa[i] = i;<br>        tarjin(s);<br>        cout&lt;&lt;ans&lt;&lt;endl;<br>        t–;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T5</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define LL long long<br>using namespace std;</p>
+<p>int n,a[10000],tot=0,minn=0x7ffffff;</p>
+<p>int main()<br>{<br>    memset(a,0,sizeof(a));<br>    while(scanf(“%d”,&amp;n)!=EOF)<br>    {<br>        tot = 0;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;a[i]);<br>        }<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            for(int j=i+1;j&lt;=n;j++)<br>            {<br>                if( a[j] &lt; a[i] ) tot++;<br>            }<br>        }<br>        minn = tot;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            tot += n-2*a[i]-1;<br>            if(tot&lt;minn)<br>            {<br>                minn = tot;<br>            }<br>        }<br>        cout&lt;&lt;minn&lt;&lt;endl;</p>
+<pre><code>&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T6</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define M 201000<br>using namespace std;</p>
+<p>struct node<br>{<br>    int from,to,val,next;<br>}e[M*2];<br>int n=1,m,sum = 0,head[M],dis[M];<br>bool pd[M];<br>inline void add(int u,int v,int val)<br>{<br>    sum++;<br>    e[sum].from = u;<br>    e[sum].to = v;<br>    e[sum].val = val;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>}<br>inline void dfs(int u)<br>{<br>    pd[u] = true;<br>    for(int i=head[u];i;i=e[i].next)<br>    {<br>        int v = e[i].to,val = e[i].val;<br>        if( pd[v]==false )<br>        {<br>            dis[v] = dis[u] + val;<br>            dfs(v);<br>        }<br>    }<br>}</p>
+<p>int main()<br>{<br>    int u,v,val;<br>    memset(head,0,sizeof(head));<br>    memset(pd,false,sizeof(pd));<br>    memset(dis,0,sizeof(dis));<br>    while( scanf(“%d %d %d”,&amp;u,&amp;v,&amp;val)!=EOF )<br>    {<br>//        scanf(“%d %d %d”,&amp;u,&amp;v,&amp;val);<br>        add(u,v,val);<br>        add(v,u,val);<br>        n++;<br>    }<br>    dfs(1);<br>    int ans = -1,maxx = -1,q;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        if( dis[i]&gt;=maxx )<br>        {<br>            q = i;<br>            maxx = dis[i];<br>        }<br>        dis[i] = 0;<br>        pd[i] = 0;<br>    }<br>    dfs(q);<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        ans = max( ans,dis[i] );<br>    }<br>    cout&lt;&lt;ans;<br>    return 0;<br>}</p>
+</blockquote>
+<p>T7</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 1001000<br>using namespace std;</p>
+<p>char s[100000];<br>struct node<br>{<br>    int son[26],tag,val;<br>    node()<br>    {<br>        memset(son,0,sizeof(son));<br>        val = 0;<br>    }</p>
+<p>}t[N];<br>int sum = 0,ans = 0;<br>inline void insert()<br>{<br>    int p = 0,len = strlen(s);<br>    for(int i=0;i&lt;len;i++)<br>    {<br>        int c = s[i] - ‘a’;<br>        if( t[p].son[c] == 0 )<br>        {<br>            sum++;<br>            t[p].son[c] = sum;<br>            t[ t[p].son[c] ].val = 1;<br>        }<br>        else  t[ t[p].son[c] ].val++;<br>        p = t[p].son[c];<br>    }<br>    t[p].tag = -1;<br>}<br>inline void search()<br>{<br>    int p = 0,len = strlen(s);<br>    for(int i=0;i&lt;len;i++)<br>    {<br>        int c = s[i] - ‘a’;<br>        if( t[p].son[c]==0 )<br>        {<br>            ans=0;<br>            return ;<br>        }<br>        p = t[p].son[c];<br>    }<br>    ans = t[p].val;<br>}</p>
+<p>int main()<br>{<br>    while( gets(s) )<br>    {<br>        if( s[0] == NULL ) break;<br>        insert();<br>    }<br>    while( gets(s) )<br>    {<br>        ans = 0;<br>        search();<br>        printf(“%d\n”,ans);<br>    }<br>;    return 0;<br>}</p>
+</blockquote>
+<p>T8 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cstring><br>#include<cmath><br>#define N 110<br>using namespace std;<br>bool pd[N][N];<br>int sum=0,n,m,fa[N],ans=0,h=0;<br>struct node<br>{<br>    int from,to,next,val;<br>}e[N*N];<br>inline void add(int u,int v,int val)<br>{<br>    sum++;<br>    e[sum].from = u;<br>    e[sum].to = v;<br>    e[sum].val = val;<br>}<br>inline bool cmp(node x,node y)<br>{<br>    return x.val&lt;y.val;<br>}<br>inline int find(int x)<br>{<br>    if( fa[x]==x ) return x;<br>    else return fa[x] = find( fa[x] );<br>}<br>void kruskal()<br>{<br>    for(int i=1;i&lt;=sum;i++)<br>    {<br>        int u = e[i].from,v = e[i].to,val = e[i].val;<br>        int x = find(u),y = find(v);<br>        if( x!=y )<br>        {<br>            fa[x] = y;<br>            h++;<br>            ans += val;<br>        }<br>        if( h==n-1 ) return ;<br>    }<br>}</p>
+<p>int main()<br>{<br>    memset(pd,false,sizeof(pd));<br>    int val,u,v,x,y;<br>    cin&gt;&gt;n;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        fa[i] = i;<br>        for(int j=1;j&lt;=n;j++)<br>        {<br>            scanf(“%d”,&amp;val);<br>            if( i!=j ) add(i,j,val);<br>        }<br>    }<br>    cin&gt;&gt;m;<br>    for(int i=1;i&lt;=m;i++)<br>    {<br>        scanf(“%d %d”,&amp;u,&amp;v);<br>        add(u,v,0);<br>    }<br>    sort(e+1,e+sum+1,cmp);<br>    kruskal();<br>    cout&lt;&lt;ans;<br>    return 0;<br>}</p>
+</blockquote>
+<p>T9 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 200<br>#define MAX 0x3f3f3f3f<br>using namespace std;</p>
+<p>int n,m;<br>int dis[N][N],a[N],u;<br>void first()<br>{<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        dis[i][i] = 0;<br>        for(int j=i+1;j&lt;=n;j++)<br>        {<br>            dis[i][j] = MAX;<br>            dis[j][i] = MAX;<br>        }<br>    }<br>}<br>void floyd()<br>{<br>    for(int k=1;k&lt;=n;k++)<br>    {<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            for(int j=1;j&lt;=n;j++)<br>            {<br>                if( dis[i][j] &gt; dis[i][k]+dis[k][j] )<br>                {<br>                    dis[i][j] = dis[i][k]+dis[k][j];<br>                }<br>            }<br>        }<br>    }<br>}</p>
+<p>int main()<br>{<br>    int v,val;<br>    while( scanf(“%d”,&amp;n) )<br>    {<br>        if(n==0) break;<br>        first();<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;m);<br>            while(m–)<br>            {<br>                scanf(“%d %d”,&amp;v,&amp;val);<br>                dis[i][v] = val;<br>            }<br>        }</p>
+<pre><code>    floyd();
+    int minn = MAX;
+    for(int i=1;i&lt;=n;i++)
+    &#123;
+        int maxx = -1;
+        for(int j=1;j&lt;=n;j++)
+        &#123;
+            if( i!=j )
+            &#123;
+                maxx = max( maxx , dis[i][j] );
+            &#125;
+        &#125;
+        if( minn&gt;maxx )
+        &#123;
+            u = i;
+            minn = maxx;
+        &#125;
+    &#125;
+    if(minn == MAX)  printf(&quot;disjoint\n&quot;);
+    else printf(&quot;%d %d\n&quot;,u,minn);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T10</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 1010<br>using namespace std;</p>
+<p>bool pd[N];<br>int fa[N],n,m,t,sum,x,y;<br>inline void zero()<br>{<br>    for(int i=1;i&lt;=n;i++)<br>    fa[i] = i;<br>}<br>inline int find(int x)<br>{<br>    if( fa[x]==x ) return x;<br>    else return fa[x] = find( fa[x] );<br>}</p>
+<p>int main()<br>{<br>    cin&gt;&gt;t;<br>    int u,v;<br>    while( t– )<br>    {<br>        sum = 0;<br>        memset(pd,0,sizeof(pd));<br>        scanf(“%d %d”,&amp;n,&amp;m);<br>        zero();<br>        for(int i=1;i&lt;=m;i++)<br>        {<br>            scanf(“%d %d”,&amp;u,&amp;v);<br>            x = find(u);<br>            y = find(v);<br>            fa[x] = y;<br>        }<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            x = find(i);<br>            if( pd[ x ]==false )<br>            {<br>                pd[ x ] = true;<br>                sum++;<br>            }<br>        }<br>        printf(“%d\n”,sum);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T11</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define LL long long<br>#define N 1100<br>using namespace std;<br>int pd,n,m,c[N][N],x,y,xx,yy,v,ans;<br>inline int lowbit(int x)<br>{<br>    return x&amp;(-x);<br>}<br>void update(int x,int y,int v)<br>{<br>    for(int i=x;i&lt;=n;i+=lowbit(i))<br>    {<br>        for(int j=y;j&lt;=n;j+=lowbit(j))<br>        {<br>            c[i][j] += v;<br>        }<br>    }<br>}<br>inline int getsum(int x,int y)<br>{<br>    int h = 0;<br>    for(int i=x;i&gt;=1;i-=lowbit(i))<br>    {<br>        for(int j=y;j&gt;=1;j-=lowbit(j))<br>        {<br>            h += c[i][j];<br>        }<br>    }<br>    return h;<br>}<br>int main()<br>{<br>    cin&gt;&gt;pd&gt;&gt;n;<br>    n++;<br>    while( scanf(“%d”,&amp;pd)!=EOF )<br>    {<br>        if(pd==3) break;<br>        if( pd==1 )<br>        {<br>            scanf(“%d %d %d”,&amp;x,&amp;y,&amp;v);<br>            x++;y++;<br>            update(x,y,v);<br>        }<br>        if( pd==2 )<br>        {<br>            scanf(“%d %d %d %d”,&amp;x,&amp;y,&amp;xx,&amp;yy);<br>            x++;y++;<br>            xx++;yy++;<br>            ans = 0;<br>            ans = getsum(xx,yy) - getsum(xx,y-1) - getsum(x-1,yy) + getsum(x-1,y-1);<br>            cout&lt;&lt;ans&lt;&lt;endl;<br>        }<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T12 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define M 32100<br>using namespace std;<br>int c[M],ans[M],n,x,y,s;<br>int lowbit(int x)<br>{<br>    return x&amp;(-x);<br>}<br>int getsum(int x)<br>{<br>    int h=0;<br>    while(x&gt;=1)<br>    {<br>        h += c[x];<br>        x -= lowbit(x);<br>    }<br>    return h;<br>}<br>void update(int x)<br>{<br>    while(x&lt;=M)<br>    {<br>        c[x]++;<br>        x+=lowbit(x);<br>    }<br>}<br>int main()<br>{<br>    cin&gt;&gt;n;<br>    memset(ans,0,sizeof(ans));<br>    memset(c,0,sizeof(c));<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%d %d”,&amp;x,&amp;y);<br>        s = getsum(x+1);<br>        update(x+1);<br>        ans[s]++;<br>    }<br>    for(int i=0;i&lt;n;i++)<br>    {<br>        printf(“%d\n”,ans[i]);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T13</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#include<cstring><br>#define N 2501000<br>using namespace std;</p>
+<p>struct node<br>{<br>    int l,r,val;<br>}t[N];<br>struct cmp<br>{<br>    int val,rank,xu;<br>}a[501000];<br>long long n,m,u,add[N];<br>inline bool came(cmp x,cmp y)<br>{<br>    return x.val&lt;y.val;<br>}<br>inline bool come(cmp x,cmp y)<br>{<br>    return x.xu&gt;y.xu;<br>}</p>
+<p>inline void build(int p,int l,int r)<br>{<br>    int ls = p&lt;&lt;1,rs = p&lt;&lt;1|1,mid = (l+r)&gt;&gt;1;<br>    t[p].l = l;<br>    t[p].r = r;<br>    if(l!=r)<br>    {<br>        build(ls,l,mid);<br>        build(rs,mid+1,r);<br>        t[p].val = 0;<br>    }<br>    else t[p].val = 0;<br>}<br>inline void pushdown(int p)<br>{<br>    int ls = p&lt;&lt;1,rs = p&lt;&lt;1|1;<br>    if( add[p]!=0 &amp;&amp; t[p].l!=t[p].r )<br>    {<br>        add[ls] += add[p];<br>        add[rs] += add[p];<br>        t[ls].val += add[p]*( t[ls].r-t[ls].l+1 );<br>        t[rs].val += add[p]*( t[rs].r-t[rs].l+1 );<br>        add[p] = 0;<br>    }<br>}<br>void update(int p,int l,int r,int v)<br>{<br>    pushdown(p);<br>    int ls = p&lt;&lt;1,rs = p&lt;&lt;1|1,mid = (t[p].l+t[p].r)&gt;&gt;1;<br>    if( t[p].l==l&amp;&amp;t[p].r==r )<br>    {<br>        add[p] += v;<br>        t[p].val += (t[p].r-t[p].l+1)*v;<br>        return ;<br>    }<br>    if(t[p].l==t[p].r) return ;<br>    if(r&lt;=mid) update(ls,l,r,v);<br>    else if(l&gt;mid) update(rs,l,r,v);<br>    else<br>    {<br>        update(ls,l,mid,v);<br>        update(rs,mid+1,r,v);<br>    }<br>    t[p].val = t[ls].val + t[rs].val;<br>}<br>inline int query(int p,int l,int r)<br>{<br>    pushdown(p);<br>    int ls = p&lt;&lt;1,rs = p&lt;&lt;1|1,mid = (t[p].l+t[p].r)&gt;&gt;1;<br>    if(    t[p].l==l&amp;&amp;t[p].r==r ) return t[p].val;<br>    if(r&lt;=mid) return query(ls,l,r);<br>    else if(l&gt;mid) return query(rs,l,r);<br>    else<br>    {<br>        return ( query(ls,l,mid) + query(rs,mid+1,r) );<br>    }<br>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while(scanf(“%d”,&amp;n)!=EOF)<br>    {<br>        if(n==0) break;<br>        memset(add,0,sizeof(add));<br>        long long ans = 0;<br>        memset(t,0,sizeof(t));<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;a[i].val);<br>            a[i].xu = i;<br>        }<br>        sort(a+1,a+n+1,came);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            a[i].rank = i;<br>        }<br>        sort(a+1,a+n+1,come);<br>        build(1,1,n);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            ans+=query(1,1,a[i].rank);<br>            update(1,a[i].rank,a[i].rank,1);<br>        }<br>        cout&lt;&lt;ans&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T14</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<string><br>#include<cmath><br>#include<stack><br>using namespace std;</p>
+<p>int sum=0;</p>
+<p>int main()<br>{<br>    int t;<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {</p>
+<pre><code>sum++;
+printf(&quot;Case %d:\n&quot;,sum);
+stack&lt;string&gt; forward;
+stack&lt;string&gt; backward;
+string command,currentpage;
+currentpage = &quot;http://www.lightoj.com/&quot;;
+while( cin&gt;&gt;command )
+&#123;
+    if( command==&quot;QUIT&quot; ) break;
+</code></pre>
+<p>​<br>        else if( command==”VISIT” )<br>        {<br>            backward.push( currentpage );<br>            cin&gt;&gt;currentpage;<br>            cout&lt;&lt;currentpage&lt;&lt;endl;<br>            while( forward.empty()==0 )<br>            {<br>                forward.pop();<br>            }<br>        }<br>        else if( command==”BACK” )<br>        {<br>            if( backward.empty()==1 )<br>            {<br>                cout&lt;&lt;”Ignored”&lt;&lt;endl;<br>            }<br>            else<br>            {<br>                forward.push( currentpage );<br>                currentpage = backward.top();<br>                backward.pop();<br>                cout&lt;&lt;currentpage&lt;&lt;endl;<br>            }<br>        }</p>
+<p>​<br>        else if( command==”FORWARD” )<br>        {<br>            if( forward.empty()==0 )<br>            {<br>                backward.push( currentpage );<br>                currentpage = forward.top();<br>                forward.pop();<br>                cout&lt;&lt;currentpage&lt;&lt;endl;<br>            }<br>            else<br>            {<br>                cout&lt;&lt;”Ignored”&lt;&lt;endl;<br>            }<br>        }<br>    }</p>
+<pre><code>&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T15</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 101000<br>using namespace std;<br>int n,a[N],b[N],t,g1[N],g2[N],m,h=0;<br>long long ans=999999999;<br>bool cmp(int x,int y)<br>{<br>    return x&lt;y;<br>}<br>inline int gcd(int a,int b)<br>{<br>    if(a&lt;b) swap(a,b);<br>    int c;<br>    while( b!=0 )<br>    {<br>        c = a;<br>        a = b;<br>        b = c%b;<br>    }<br>    return a;<br>}<br>void work()<br>{<br>    for(int i=1;i&lt;=m;i++)<br>    {<br>        int g;<br>        long long sum=0;<br>        if(i==1) g = g2[2];<br>        else if( i==m ) g = g1[m-1];<br>        else<br>        {<br>            g = gcd( g1[i-1] , g2[i+1] );<br>        }<br>        sum = (h-b[i])/g - ( m-1 );<br>        ans = min( ans, sum );<br>    }<br>}</p>
+<p>int main()<br>{<br>    cin&gt;&gt;n;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%d”,&amp;a[i]);<br>    }<br>    m = n-1;<br>    sort(a+1,a+n+1);<br>    for(int i=1;i&lt;=m;i++)<br>    {<br>        b[i] = a[i+1] - a[i];<br>        h += b[i];<br>    }<br>    g1[0] = b[1];<br>    for(int i=1;i&lt;=m;i++)<br>    {<br>        g1[i] = gcd( b[i] , g1[i-1] );<br>    }</p>
+<pre><code>g2[m] = b[m];
+for(int i=m;i&gt;=1;i--)
+&#123;
+    g2[i] = gcd( b[i] , g2[i+1] );
+&#125;
+
+work();
+printf(&quot;%lld&quot;,ans);
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T16</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define N 251000<br>#define LL long long<br>using namespace std;</p>
+<p>struct node<br>{<br>    LL pos,val;<br>}e[N*2];<br>LL n,m,l,r,sum=0,ans[N];<br>bool cmp(node x,node y)<br>{<br>    if( x.pos!=y.pos )<br>    return x.pos&lt;y.pos;<br>    else return x.val&lt;y.val;<br>}</p>
+<p>int main()<br>{<br>    memset(ans,0,sizeof(ans));<br>    cin&gt;&gt;n;<br>    for(LL i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%lld %lld”,&amp;l,&amp;r);<br>        sum++;e[sum].pos = l;    e[sum].val = 1;<br>        sum++;e[sum].pos = r+1;    e[sum].val = -1;<br>    }<br>    sort(e+1,e+sum+1,cmp);<br>    LL c,now = 0,last = 0;<br>    for(int i=1;i&lt;=sum;i++)<br>    {<br>        c = e[i].pos;<br>        ans[now] += (c-last);<br>        now += e[i].val;<br>        last = e[i].pos;<br>    }<br>    for(int i=1;i&lt;n;i++)<br>    {<br>        printf(“%lld “,ans[i]);<br>    }<br>    cout&lt;&lt;ans[n]&lt;&lt;endl;<br>    return 0;<br>}</p>
+</blockquote>
+<p>T17</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include <cmath><br>#include &lt;stdio.h&gt;<br>#include<algorithm><br>#include<cmath><br>using namespace std;<br>const int N = 101000;</p>
+<p>int a[N],n;<br>int m[N][20];<br>void getst()<br>{<br>    int i,j;<br>    for(i=0;i&lt;n;i++)<br>    {<br>        m[i][0] = 1;<br>    }<br>    for(j=1;(1&lt;&lt;j)&lt;=n;j++)<br>    {<br>        for(i=0;i+(1&lt;&lt;j)-1&lt;n;i++)<br>        {<br>            if( m[i][j-1] &gt; m[i+(1&lt;&lt;(j-1))][j-1] )<br>            {<br>                m[i][j] = m[i][j-1];<br>            }<br>            else m[i][j] = m[i+(1&lt;&lt;(j-1))][j-1];    </p>
+<pre><code>        int tmp = a[i+(1&lt;&lt;(j-1))-1],x = i+(1&lt;&lt;(j-1))-1,y=x,r = i+(1&lt;&lt;j)-1;
+        while( x&gt;=i&amp;&amp;a[x]==tmp ) x--;
+        while( y&lt;=r&amp;&amp;a[y]==tmp ) y++;
+        int len = y-x-1;
+        if( len&gt;m[i][j] ) m[i][j] = len;
+        
+    &#125;
+&#125;
+</code></pre>
+<p>}</p>
+<p>int query(int l,int r)<br>{<br>    int k=(int)(log((r-l+1)*1.0)/(log(2.0)));<br>    int ans;<br>    if( m[l][k] &lt; m[r-(1&lt;&lt;k)+1][k] ) ans = m[r-(1&lt;&lt;k)+1][k];<br>    else ans = m[l][k];<br>    int tmp = a[l+(1&lt;&lt;k)-1],x = l+(1&lt;&lt;k)-1,y = x;<br>    while( x&gt;=l&amp;&amp;a[x]==tmp ) x–;<br>    while( y&lt;=r&amp;&amp;a[y]==tmp ) y++;<br>    int len = y-x-1;<br>    if( len &gt; ans ) ans = len;<br>    return ans;<br>}</p>
+<p>int main()<br>{<br>    int l,r,q,ans;<br>    while( 1 )<br>    {<br>        scanf(“%d”,&amp;n);<br>        if( n==0 ) break;<br>        scanf(“%d”,&amp;q);<br>        for(int i=0;i&lt;n;i++)<br>        {<br>            scanf(“%d”,&amp;a[i]);<br>        }<br>        getst();<br>        while(q–)<br>        {<br>            scanf(“%d %d”,&amp;l,&amp;r);<br>            ans=query(l-1,r-1);<br>            printf(“%d\n”,ans);<br>        }<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>T18</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 11000<br>using namespace std;</p>
+<p>char s[N],ans[N];<br>int n,m,l,r,sum;</p>
+<p>int main()<br>{<br>    while( cin&gt;&gt;s&gt;&gt;m )<br>    {<br>        l = 0;<br>        r = m;<br>        sum = 0;<br>        n = strlen(s);<br>        m = n - m;<br>        while(m–)<br>        {<br>            int  p = l;<br>            for(int i=l;i&lt;=r;i++)<br>            {<br>                if( s[p] &gt; s[i] ) p = i;<br>            }<br>            ans[sum++] = s[p];<br>            l = p+1;<br>            r++;<br>        }<br>        int head = 0;<br>        while( ans[head]==’0’  &amp;&amp; head&lt;sum ) head++;<br>        if( head==sum ) printf(“0”);<br>        else<br>        {<br>            while(head&lt;sum)<br>            {<br>                printf(“%c”,ans[head]);</p>
+<pre><code>            head++;
+        &#125;
+    &#125;
+    cout&lt;&lt;endl;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+
                 
             </div>
             <hr/>

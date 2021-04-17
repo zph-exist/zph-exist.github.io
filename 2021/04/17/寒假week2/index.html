@@ -464,7 +464,170 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>T1</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define N 110000<br>#define INF 0x3f3f3f3f<br>using namespace std;</p>
+<p>int n,a[N],t,ans,last;</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        ans = 0;<br>        scanf(“%d”,&amp;n);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;a[i]);<br>        }<br>        sort(a+1,a+n+1);<br>        a[n+1] = INF;<br>        for(int i=n;i&gt;=1;i–)<br>        {<br>            if( a[i+1] - a[i] &gt;1 )<br>            {<br>                a[i]++;<br>            }<br>            if( a[i+1] != a[i] ) ans++;<br>        }<br>        cout&lt;&lt;ans&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t2</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 250<br>#define INF 0x3f3f3f3f<br>using namespace std;</p>
+<p>int n,t;<br>string s;<br>inline bool judge()<br>{<br>    if( n&lt;4 ) return false;<br>    if( ( s[0]==’2’&amp;&amp;s[1]==’0’ ) &amp;&amp; (s[2]==’2’&amp;&amp;s[3]==’0’) ) return true;<br>    if( ( s[n-4]==’2’&amp;&amp;s[n-3]==’0’ ) &amp;&amp; (s[n-2]==’2’&amp;&amp;s[n-1]==’0’) ) return true;<br>    if( ( s[0]==’2’&amp;&amp;s[1]==’0’ ) &amp;&amp; (s[2]==’2’&amp;&amp;s[n-1]==’0’) ) return true;<br>    if( ( s[0]==’2’&amp;&amp;s[1]==’0’ ) &amp;&amp; (s[n-2]==’2’&amp;&amp;s[n-1]==’0’) ) return true;<br>    if( ( s[0]==’2’&amp;&amp;s[n-3]==’0’ ) &amp;&amp; (s[n-2]==’2’&amp;&amp;s[n-1]==’0’) ) return true;</p>
+<pre><code>return false;
+</code></pre>
+<p>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        scanf(“%d”,&amp;n);<br>        cin&gt;&gt;s;<br>        if( judge()==true ) printf(“YES\n”);<br>        else printf(“NO\n”);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t3</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cstring><br>#define N 105<br>#define INF 0x3f3f3f3f<br>using namespace std;</p>
+<p>int n,ans=0;<br>string s;<br>int main()<br>{<br>    cin&gt;&gt;s;<br>    n = s.size();<br>    for(int i=0;i&lt;n;i++)<br>    {<br>        if( s[i]==’Q’ )<br>        {<br>            for(int j=i+1;j&lt;n;j++)<br>            {<br>                if( s[j]==’A’ )<br>                {<br>                    for(int k=j+1;k&lt;n;k++)<br>                    {<br>                        if( s[k]==’Q’ ) ans++;<br>                    }<br>                }<br>            }<br>        }<br>    }<br>    cout&lt;&lt;ans;<br>    return 0;<br>}</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>TD<br>题意：此题是统计最长不递减子序列。</p>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cstring><br>#define N 105<br>#define INF 0x3f3f3f3f<br>using namespace std;</p>
+<p>int n,ans=0;<br>string s;<br>int main()<br>{<br>    cin&gt;&gt;s;<br>    n = s.size();<br>    for(int i=0;i&lt;n;i++)<br>    {<br>        if( s[i]==’Q’ )<br>        {<br>            for(int j=i+1;j&lt;n;j++)<br>            {<br>                if( s[j]==’A’ )<br>                {<br>                    for(int k=j+1;k&lt;n;k++)<br>                    {<br>                        if( s[k]==’Q’ ) ans++;<br>                    }<br>                }<br>            }<br>        }<br>    }<br>    cout&lt;&lt;ans;<br>    return 0;<br>}</p>
+</blockquote>
+<p>t4</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<cstring><br>#define N 101<br>#define INF 0x3f3f3f<br>using namespace std;</p>
+<p>int n,d,ans=0,f[N];<br>char s[N];</p>
+<p>int main()<br>{<br>//    memset(f,INF,sizeof(f));<br>    cin&gt;&gt;n&gt;&gt;d;<br>    scanf(“%s”,s+1);<br>    for(int i=1;i&lt;=n;i++) f[i] = INF;<br>    f[1] = 0;</p>
+<pre><code>for(int p=1;p&lt;n;p++)
+&#123;
+    for(int j=1;j&lt;=d;j++)
+    &#123;
+        if( p+j&gt;n ) break;
+        if( s[p+j]==&#39;1&#39; )
+        &#123;
+            f[p+j] = min( f[p+j] , f[p]+1 );
+        &#125;
+    &#125;
+&#125;
+if( f[n]==INF ) cout&lt;&lt;-1&lt;&lt;endl;
+else cout&lt;&lt;f[n]&lt;&lt;endl;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t5 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define LL long long<br>using namespace std;</p>
+<p>LL a[10],n,ans=0;</p>
+<p>int main()<br>{<br>    cin&gt;&gt;n;<br>    a[1] = 100;<br>    a[2] = 20;<br>    a[3] = 10;<br>    a[4] = 5;<br>    a[5] = 1;<br>    for(int i=1;i&lt;=5;i++)<br>    {<br>        if( n&gt;=a[i] )<br>        {<br>            ans += n/a[i];<br>            n -= a[i] * (n/a[i]);<br>        }<br>    }<br>//    if( n&gt;=100 ) ans += n/100;<br>    cout&lt;&lt;ans;<br>    return 0;<br>}</p>
+</blockquote>
+<p>t6</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define  N 101<br>using namespace std;</p>
+<p>int n;</p>
+<p>int main()<br>{<br>    cin&gt;&gt;n;<br>    cout&lt;&lt; n<em>n + (n-1)</em>(n-1);<br>    return 0;<br>}</p>
+</blockquote>
+<p>t7 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstring><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#define M 310000<br>using namespace std;</p>
+<p>int n,m,p[M],a[M],t;<br>bool pd[M];<br>long long ans;</p>
+<p>int main()<br>{<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        ans = 0;<br>        memset(pd,0,sizeof(pd));<br>        scanf(“%d %d”,&amp;n,&amp;m);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;a[i]);<br>        }<br>        for(int j=1;j&lt;=m;j++)<br>        {<br>            cin&gt;&gt;p[j];<br>//            scanf(“%d”,&amp;p[i]);<br>        }<br>        int minn = 1;<br>        sort(a+1,a+n+1);<br>        for(int i=n;i&gt;=1;i–)<br>        {<br>            if( minn &lt; a[i] )<br>            {<br>                ans += p[minn];<br>                minn++;<br>            }<br>            else<br>            {<br>                ans += p[ a[i] ];<br>            }<br>        }<br>        printf(“%lld\n”,ans);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t8 </p>
+<blockquote>
+<p>#include<iostream><br>#include<cstring><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#define N 1000<br>#define INF 0x3f3f3f3f<br>using namespace std;</p>
+<p>int m,n,w1,w2,dp[1000000],v[N],p[N],t;</p>
+<p>int main()<br>{<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        scanf(“%d %d”,&amp;w1,&amp;w2);<br>        m = w2-w1;<br>        scanf(“%d”,&amp;n);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d %d”,&amp;p[i],&amp;v[i]);<br>        }<br>        dp[0] = 0;<br>        for(int i=1;i&lt;=m;i++)<br>        {<br>            dp[i] = INF;<br>        }<br>         for(int i=1;i&lt;=n;i++)<br>         {<br>             for(int j=v[i];j&lt;=m;j++)<br>             {<br>                 dp[j] = min( dp[j] , dp[j-v[i]]+p[i] );<br>             }<br>         }<br>         if( dp[m] == INF ) printf(“This is impossible.\n”);<br>         else printf(“The minimum amount of money in the piggy-bank is %d.\n”,dp[m]);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t9</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N 1010<br>using namespace std;</p>
+<p>int h,n,v[N],f[N],m;<br>int main()<br>{<br>    while( cin&gt;&gt;n )<br>    {<br>        memset(f,0,sizeof(f));<br>        if( n==0 ) break;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;v[i]);<br>        }<br>        sort(v+1,v+n+1);<br>        scanf(“%d”,&amp;m);<br>        if( m&lt;5 )<br>        {<br>            printf(“%d\n”,m);<br>        }<br>        else<br>        {<br>            for(int i=1;i&lt;n;i++)<br>            {<br>                for(int j=m-5;j&gt;=v[i];j–)<br>                {<br>                    f[j] = max( f[j] , f[j-v[i]] + v[i] );<br>                }<br>            }<br>            printf(“%d\n”,m-f[m-5]-v[n]);<br>        }<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t10</p>
+<blockquote>
+<p>#include<cstring><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#include<iostream><br>#define N 1010<br>#define INF 0x3f3f3f3f<br>#define LL long long<br>using namespace std;</p>
+<p>LL n,m,t,p[N],v[N],dp[N];</p>
+<p>int main()<br>{<br>    cin&gt;&gt;t;<br>    while(t–)<br>    {<br>        scanf(“%lld %lld”,&amp;n,&amp;m);<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%lld”,&amp;p[i]);<br>        }<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%lld”,&amp;v[i]);<br>        }<br>        memset(dp,0,sizeof(dp));<br>        for(LL i=1;i&lt;=n;i++)<br>        {<br>            for(LL j=m;j&gt;=v[i];j–)<br>            {<br>                dp[j] = max( dp[j] , dp[j-v[i]] + p[i] );<br>            }<br>        }<br>        printf(“%lld\n”,dp[m]);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t11</p>
+<blockquote>
+<p>#include <cstdio><br>#include <iostream><br>#include <sstream><br>#include <cmath><br>#include <cstring><br>#include <cstdlib><br>#include <string><br>#include <vector><br>#include <map><br>#include <set><br>#include <queue><br>#include <stack><br>#include <algorithm><br>using namespace std;<br>#define ll long long<br>int w[MAXN];<br>bool f[MAXN] = {false};<br>vector<int> v[MAXN];<br>int d[MAXN][2];<br>bool vis[MAXN] = {false};<br>void dp(int root)<br>{<br>    if(vis[root]) return ;<br>    vis[root] = true;<br>    int siz = v[root].size();<br>    repu(i, 0, siz) dp(v[root][i]);</p>
+<pre><code>repu(i, 0, siz)
+&#123;
+    d[root][0] += max(d[v[root][i]][1], d[v[root][i]][0]);
+    d[root][1] += d[v[root][i]][0];
+&#125;
+return ;
+</code></pre>
+<p>}<br>int main()<br>{<br>    int n;<br>    while(~sfi(n))<br>    {<br>        _cle(vis, false);<br>        _cle(f, false);<br>        repu(i, 1, n + 1)<br>        {<br>            sfi(w[i]);<br>            v[i].clear();<br>            d[i][0] = 0;<br>            d[i][1] = w[i];<br>        }<br>        int x, y;<br>        while(sfi(x), sfi(y), x + y)<br>        {<br>            v[y].push_back(x);<br>            f[x] = true;<br>        }<br>        int root;<br>        repu(i, 1, n + 1) if(!f[i])<br>        {<br>            root = i;<br>            break;<br>        }<br>        dp(root);<br>        pfi(max(d[root][0], d[root][1]));<br>        //repu(i, 1, n + 1) printf(“%d %d\n”, d[i][0], d[i][1]);<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t12</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#define N  100100<br>using namespace std;</p>
+<p>struct node<br>{<br>    int to,next,val;<br>}e[20010];<br>int n,k,s,head[N],sum=0,dp[N][15];<br>inline void add(int u,int v,int val)<br>{<br>    sum++;<br>    e[sum].to = v;<br>    e[sum].val = val;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>}<br>inline void dfs(int p,int fa)<br>{<br>    for(int i=head[p];i;i=e[i].next)<br>    {<br>        int v = e[i].to,val = e[i].val;<br>        if( v==fa ) continue;<br>        dfs(v,p);<br>        for(int j=k;j&gt;=0;j–)<br>        {<br>            dp[p][j] = dp[p][j] + 2<em>val + dp[v][0];<br>            for(int t=1;t&lt;=j;t++)<br>            {<br>                int h = dp[p][j-t] + t</em>val + dp[v][t];<br>                dp[p][j] = min( dp[p][j] , h );<br>            }<br>        }<br>    }<br>}</p>
+<p>int main()<br>{<br>    int u,v,val;<br>    while( scanf(“%d %d %d”,&amp;n,&amp;s,&amp;k)==3 )<br>    {<br>        sum = 0;<br>        memset(dp,0,sizeof(dp));<br>        memset(head,0,sizeof(head));<br>        for(int i=1;i&lt;=n-1;i++)<br>        {<br>            scanf(“%d %d %d”,&amp;u,&amp;v,&amp;val);<br>            add(u,v,val);<br>            add(v,u,val);<br>        }<br>        dfs(s,-1);<br>        printf(“%d\n”,dp[s][k]);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<p>t13</p>
+<blockquote>
+<p>#include<iostream></p>
+<p>using namespace std;</p>
+<p>#define bll long long</p>
+<p>const int maxn = 110;<br>int T,n,c[maxn];<br>int dp[maxn][maxn];</p>
+<p>int main()<br>{<br>    scanf(“%d”,&amp;T);<br>    for (int Case = 1; Case &lt;= T; Case++)<br>    {<br>        scanf(“%d”,&amp;n);<br>        for (int i=1;i&lt;=n;i++) scanf(“%d”,&amp;c[i]);</p>
+<pre><code>    memset(dp,0,sizeof(dp));
+    for (int i=1;i&lt;=n;i++)
+        for (int j=i;j&lt;=n;j++) dp[i][j] = j-i+1;
+
+    for (int i=n;i&gt;0;i--)
+       for (int j=i+1;j&lt;=n;j++)
+       &#123;
+           dp[i][j] = min(dp[i][j],dp[i][j-1]+1);
+           for (int k=i;k&lt;j;k++)
+               if (c[k] == c[j])
+                   dp[i][j] = min(dp[i][j],dp[i][k]+dp[k+1][j-1]);
+       &#125; 
+    printf(&quot;Case %d: %d\n&quot;,Case,dp[1][n]);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>t14</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#define N 152<br>#define MIN 0xc0c0c0c0<br>#define MAX 0x3f3f3f3f<br>using namespace std;</p>
+<p>struct node<br>{<br>    int to,next;<br>}e[N*2];<br>int n,m,p,head[N],ru[N],sum=0,dp[N][N];<br>void add(int u,int v)<br>{<br>    sum++;<br>    e[sum].to = v;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>}<br>void dfs(int now)<br>{<br>    for(int i=head[now];i;i=e[i].next)<br>    {<br>        int v = e[i].to;<br>        dfs(v);<br>        for(int j=p;j&gt;=1;j–)<br>        {<br>            dp[now][j] = dp[now][j] + 1;<br>            for(int k=1;k&lt;j;k++)<br>            {<br>                dp[now][j] = min( dp[now][j] , dp[now][j-k]+dp[v][k] );<br>            }<br>        }<br>    }<br>}</p>
+<p>int main()<br>{</p>
+<pre><code>memset(ru,0,sizeof(ru));
+memset(head,0,sizeof(head));
+int root,u,v;
+cin&gt;&gt;n&gt;&gt;p;
+for(int i=1;i&lt;=n-1;i++)
+&#123;
+    scanf(&quot;%d %d&quot;,&amp;u,&amp;v);
+    add(u,v);
+    ru[v]++;
+&#125;
+memset(dp,MAX,sizeof(dp));
+for(int i=1;i&lt;=n;i++)
+&#123;
+    if( ru[i]==0 ) root = i;
+    dp[i][1] = 0;
+&#125;
+dfs(root);
+int x=1,minn = dp[1][p];
+for(int i=2;i&lt;=n;i++)
+&#123;
+    if( minn &gt; dp[i][p] )
+    &#123;
+        x = i;
+        minn = dp[i][p];        
+    &#125;
+&#125;
+if( x==1 ) cout&lt;&lt;dp[1][p];
+else cout&lt;&lt;dp[x][p]+1;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+
                 
             </div>
             <hr/>
