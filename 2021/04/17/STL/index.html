@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="The frist blog, 欧阳凌烟">
+    <meta name="keywords" content="STL, 欧阳凌烟">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>The frist blog | 欧阳凌烟</title>
+    <title>STL | 欧阳凌烟</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">The frist blog</h1>
+                    <h1 class="description center-align post-title">STL</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-17
                 </div>
                 
 
@@ -464,10 +464,147 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Today is a special day and it is worth commemorating. Because I open my blog and try to write my first blog artist, which is this one. </p>
-<p>I found it was wonderful to write in English, and it was also admirable to be corrected by Typora when I make mistakes. </p>
-<p>I can’t help but wonder what this blog will look like in the future, Maybe it will witness the my progress, happiness, new interest, trough period, sad, or even depraved and despair. But it is me, the real me, all right? Does it always witness something.</p>
-<p>In the end, I’d like to thanks for their technical support (┌・ω・)┌:@ jjhqwq.top @zzsqwq.cn, hope I could catch up with them soon. And thanks for the person I love @Zhaotong, thank you for everything</p>
+                <h3 id="标准化模板库，STL"><a href="#标准化模板库，STL" class="headerlink" title="标准化模板库，STL"></a>标准化模板库，STL</h3><p>STL(Standard Template Library),是C++标准库的一部分，包含了一些模板化的数据结构和算法，由于模板化的特点，他能够兼容自定义的数据类型，避免大量造轮子的工作（造轮子指重复发明已有算法，重复编写优化过的代码，耗时耗力，没有其他人造的好，如果不是为了学习和练习，往往是浪费时间）。NOI和ICPC赛事都支持STL库的使用，因此合理利用STL可以避免编写无用算法，并且充分利用编译器对模板库的优化提高效率</p>
+<h5 id="STL容器"><a href="#STL容器" class="headerlink" title="STL容器"></a>STL容器</h5><h6 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h6><ol>
+<li>向量（vector）后端可高效增加元素的顺序表。</li>
+<li>数组（array）定长的顺序表，C 风格数组的简单包装。</li>
+<li>双端队列（deque）双端都可高效增加元素的顺序表。</li>
+<li>列表（list）可以沿双向遍历的链表。</li>
+<li>单项列表（forward_list）只能沿一个方向遍历的链表。</li>
+</ol>
+<h6 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h6><ol>
+<li>集合（set）用以有序地存储 <strong>互异</strong> 元素的容器。其实现是由节点组成的红黑树，每个节点都包含着一个元素，节点之间以某种比较元素大小的谓词进行排列。（红黑树应该在线段树那里介绍过了，不再重复）</li>
+<li>多重集合（multiset）用以有序地存储元素的容器。允许存在相等的元素。</li>
+<li>映射（map）由 {键，值} 对组成的集合，以某种比较键大小关系的谓词进行排列。</li>
+<li>多重映射（multimap）由 {键，值} 对组成的多重集合，亦即允许键有相等情况的映射。</li>
+</ol>
+<h6 id="无序（关联式）容器"><a href="#无序（关联式）容器" class="headerlink" title="无序（关联式）容器"></a>无序（关联式）容器</h6><ol>
+<li><p>无序（多重）集合(<code>unordered_set</code>/<code>unordered_multiset)C++11，与 </code>set<code>/</code>multiset` 的区别在与元素无序，只关心”元素是否存在“，使用哈希实现。</p>
+</li>
+<li><p>无序（多重）映射(<code>unordered_map</code>/<code>unordered_multimap</code>)C++11，与 <code>map</code>/<code>multimap</code> 的区别在与键 (key) 无序，只关心 “键与值的对应关系”，使用哈希实现。</p>
+</li>
+</ol>
+<h6 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h6><ol>
+<li>栈（stack）后进先出(LIFO)的容器</li>
+<li>队列(queue)先进先出的容器</li>
+<li>优先队列（priority_queue）元素的次序是有作用于所存储的值对上的某种谓词决定的一种队列</li>
+</ol>
+<h4 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h4><h6 id="容器声明"><a href="#容器声明" class="headerlink" title="容器声明"></a>容器声明</h6><p>都是 <code>containerName&lt;typeName,...&gt; name</code> 的形式，但模板参数（<code>&lt;&gt;</code> 内的参数）的个数、形式会根据具体容器而变。</p>
+<p>本质原因：STL 就是“标准模板库”，所以容器都是模板（template）类。</p>
+<h6 id="共有函数"><a href="#共有函数" class="headerlink" title="共有函数"></a>共有函数</h6><ol>
+<li><p>=`：有赋值运算符以及复制构造函数。</p>
+</li>
+<li><p><code>begin()</code>：返回指向开头元素的迭代器。</p>
+</li>
+</ol>
+<p><code>3. end()</code>：返回指向末尾的下一个元素的迭代器。<code>end()</code> 不指向某个元素，但它是末尾元素的后继。</p>
+<ol start="4">
+<li><p><code>size()</code>：返回容器内的元素个数。</p>
+</li>
+<li><p><code>max_size()</code>：返回容器 <strong>理论上</strong> 能存储的最大元素个数。依容器类型和所存储变量的类型而变。</p>
+</li>
+</ol>
+<p><code>6. empty()</code>：返回容器是否为空。</p>
+<ol start="7">
+<li><p><code>swap()</code>：交换两个容器。</p>
+</li>
+<li><p><code>clear()</code>：清空容器。</p>
+</li>
+<li><p><code>==</code>/<code>!=</code>/<code>&lt;</code>/<code>&gt;</code>/<code>&lt;=</code>/<code>&gt;=</code>：按 <strong>字典序</strong> 比较两个容器的大小。（比较元素大小时 <code>map</code> 的每个元素相当于 <code>set&lt;pair&lt;key, value&gt; &gt;</code>，无序容器不支持 <code>&lt;</code>/<code>&gt;</code>/<code>&lt;=</code>/<code>&gt;=</code>。）</p>
+</li>
+</ol>
+<h4 id="STL算法"><a href="#STL算法" class="headerlink" title="STL算法"></a>STL算法</h4><p>完整的函数列表见 <a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/algorithm">参考手册</a> ，排序相关见 <a target="_blank" rel="noopener" href="https://oi-wiki.org/basic/stl-sort/">排序对应页面</a></p>
+<p>这里不再详细介绍</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h6 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#define LL long long<br>using namespace std;</p>
+<p>int n,m,t;</p>
+<p>int main()<br>{<br>    while( scanf(“%d %d”,&amp;n,&amp;m)!=EOF )<br>    {<br>        set<int> s;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            scanf(“%d”,&amp;t);<br>            s.insert(t);<br>        }<br>        for(int i=1;i&lt;=m;i++)<br>        {<br>            scanf(“%d”,&amp;t);<br>            s.insert(t);<br>        }<br>        int i=0;<br>        while( s.size()&gt;0 )<br>        {<br>            if( i==0 ) printf(“%d”,( *s.begin() ));<br>            else printf(“ %d”,( *s.begin() ));<br>            s.erase( s.begin() );<br>            i++;<br>        }<br>        cout&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<h6 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#include<stack><br>#define LL long long<br>#define N 1010<br>using namespace std;</p>
+<p>int n,in[N],out[N],ans[N],len=0;</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while( scanf(“%d”,&amp;n)!=EOF )<br>    {<br>        len = 0;<br>        char c;<br>        int j;<br>        bool pd = true;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            cin&gt;&gt;c;<br>            in[i] = c-‘0’;<br>        }<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            cin&gt;&gt;c;<br>            out[i] = c-‘0’;</p>
+<pre><code>    &#125;
+    stack&lt;int&gt; s;
+    j = 1;
+    for(int i=1;i&lt;=n;i++)
+    &#123;
+        while( !s.empty() &amp;&amp; out[j]==s.top() )
+        &#123;
+            j++;
+            s.pop();
+            ans[++len] = 2;
+        &#125;
+        s.push( in[i] );
+        ans[++len] = 1;
+    &#125;
+    while( j&lt;=n &amp;&amp; !s.empty() &amp;&amp; out[j]==s.top() )
+    &#123;
+        ans[++len] = 2;
+        j++;
+        s.pop();
+    &#125;
+    if( !s.empty() ) pd = false;
+    
+    if( pd ) printf(&quot;Yes.\n&quot;);
+    else printf(&quot;No.\n&quot;);
+    
+    if( pd ) 
+    for(int i=1;i&lt;=len;i++)
+    &#123;
+        if( ans[i]==1 ) printf(&quot;in\n&quot;);
+        else if(ans[i]==2) printf(&quot;out\n&quot;);
+    &#125;
+    printf(&quot;FINISH\n&quot;);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<h6 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#define LL long long<br>using namespace std;</p>
+<p>int n,ans;<br>string s;<br>set<string> sa;</p>
+<p>int main()<br>{<br>    while( scanf(“%d”,&amp;n)!=EOF )<br>    {<br>        sa.clear();<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            cin&gt;&gt;s;<br>            sa.insert(s);<br>        }<br>        printf(“%d\n”,sa.size());<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<h6 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include&lt;bits/stdc++.h&gt;<br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#define LL long long<br>#define N 1010<br>using namespace std;</p>
+<p>int n,m,a[N];</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while( scanf(“%d %d”,&amp;n,&amp;m)!=EOF )<br>    {<br>        for(int i=1;i&lt;=n;i++) a[i] = i;<br>        for(int i=1;i&lt;=m-1;i++)<br>        {<br>            next_permutation( a+1,a+n+1 );<br>        }<br>        printf(“%d”,a[1]);<br>        for(int i=2;i&lt;=n;i++) printf(“ %d”,a[i]);<br>        cout&lt;&lt;endl;<br>    }<br>    return 0;<br>}</p>
+</blockquote>
+<h6 id="T5"><a href="#T5" class="headerlink" title="T5"></a>T5</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include&lt;bits/stdc++.h&gt;<br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#define LL long long<br>#define N 1010<br>using namespace std;</p>
+<p>map&lt;string,string&gt;ma;<br>map&lt;string,string&gt;::iterator it;<br>string a,b,s;<br>int n,len;<br>bool check(char c)<br>{<br>   if( ( c&gt;=’a’&amp;&amp;c&lt;=’z’ ) || ( c&gt;=’A’&amp;&amp;c&lt;=’Z’ ) ) return true;<br>   else return false;<br>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>   cin&gt;&gt;a;<br>   while( cin&gt;&gt;a )<br>   {<br>       if( a.compare(“END”)==0 ) break;<br>       else cin&gt;&gt;b;<br>       ma[b] = a;<br>   }<br>   cin&gt;&gt;a;<br>   getchar();<br>   while( 1 )<br>   {<br>       getline(cin,s);<br>       if( s==”END” ) break;<br>       n = s.size();<br>       for(int i=0;i&lt;n;i++)<br>       {<br>           len = 0;<br>           char d[1010];<br>           if( check(s[i]) )<br>           {<br>               len = 0;<br>               for(;i&lt;n;i++)<br>               {<br>                   if( check(s[i]) ) d[len++] = s[i];<br>                   else break;<br>               }<br>               d[len] = ‘\0’;<br>               if( ma.find(d)!=ma.end() ) cout&lt;&lt;ma[d];<br>               else cout&lt;&lt;d;<br>           }<br>           cout&lt;&lt;s[i];<br>       }<br>       cout&lt;&lt;endl;<br>   }<br>   return 0;<br>}</p>
+</blockquote>
+<h6 id="T6"><a href="#T6" class="headerlink" title="T6"></a>T6</h6><blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include&lt;bits/stdc++.h&gt;<br>#include<cstring><br>#include<algorithm><br>#include<cmath><br>#include<map><br>#include<set><br>#define LL long long<br>#define N 1010<br>using namespace std;</p>
+<p>string s;<br>int l,h=0,ans;</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while( cin&gt;&gt;s )<br>    {<br>        ans = 0;<br>        l = 0;<br>        if( s[0]==’-‘ ) break;<br>        h++;<br>        cout&lt;&lt;h&lt;&lt;”. “;<br>        for(int i=0;i&lt;s.size();i++)<br>        {</p>
+<pre><code>    if( s[i]==&#39;&#123;&#39; )
+    &#123;
+        l++;
+    &#125;
+    else 
+    &#123;
+        if( l&gt;0 )
+        &#123;
+            l--;
+        &#125;
+        else
+        &#123;
+            ans++;
+            l++;
+        &#125;
+    &#125;
+        
+    &#125;
+    ans += l/2;
+    cout&lt;&lt;ans&lt;&lt;endl;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
 
                 
             </div>
@@ -494,7 +631,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zph-exist.github.io/2021/03/31/new-blog/">http://zph-exist.github.io/2021/03/31/new-blog/</a>
+                    <a href="http://zph-exist.github.io/2021/04/17/STL/">http://zph-exist.github.io/2021/04/17/STL/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -705,13 +842,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AD%A6%E4%B9%A0/">
+                <a href="/2021/04/17/week3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="线段树学习">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="week3">
                         
-                        <span class="card-title">线段树学习</span>
+                        <span class="card-title">week3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -722,7 +859,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                         </span>
                         <span class="publish-author">
                             
@@ -739,16 +876,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/31/new-blog/">
+                <a href="/2021/04/17/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%B8%8E%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E5%A0%86%E4%BC%98%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="The frist blog">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="拓扑排序与迪杰斯特拉堆优化">
                         
-                        <span class="card-title">The frist blog</span>
+                        <span class="card-title">拓扑排序与迪杰斯特拉堆优化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,7 +896,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                             </span>
                         <span class="publish-author">
                             
@@ -769,7 +906,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

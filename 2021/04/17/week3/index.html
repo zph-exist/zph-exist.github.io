@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="The frist blog, 欧阳凌烟">
+    <meta name="keywords" content="week3, 欧阳凌烟">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>The frist blog | 欧阳凌烟</title>
+    <title>week3 | 欧阳凌烟</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">The frist blog</h1>
+                    <h1 class="description center-align post-title">week3</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-17
                 </div>
                 
 
@@ -464,10 +464,64 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Today is a special day and it is worth commemorating. Because I open my blog and try to write my first blog artist, which is this one. </p>
-<p>I found it was wonderful to write in English, and it was also admirable to be corrected by Typora when I make mistakes. </p>
-<p>I can’t help but wonder what this blog will look like in the future, Maybe it will witness the my progress, happiness, new interest, trough period, sad, or even depraved and despair. But it is me, the real me, all right? Does it always witness something.</p>
-<p>In the end, I’d like to thanks for their technical support (┌・ω・)┌:@ jjhqwq.top @zzsqwq.cn, hope I could catch up with them soon. And thanks for the person I love @Zhaotong, thank you for everything</p>
+                <p>T1:</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#include<cstring><br>using namespace std;<br>int n;<br>int tot,s[100000],ans[100100],sum,be[100000],en[100000];<br>char a[10000],b[100000];<br>void push(int k)//进栈<br>{<br>   tot++;<br>   s[tot] = k;<br>}<br>int main()<br>{<br>   while(cin&gt;&gt;n&gt;&gt;a&gt;&gt;b)<br>   {<br>       tot = 0;sum = 0;<br>       memset(ans,0,sizeof(0));<br>       for(int i=n;i&gt;=1;i–)<br>       {<br>           be[i] = a[i-1] - ‘0’;<br>       }<br>       for(int i=n;i&gt;=1;i–)<br>       {<br>           en[i] = b[i-1] - ‘0’;<br>       }<br>       int t = 0,flag = 1;<br>       for(int i=1;i&lt;=n;i++)<br>       {<br>           push( be[i] );<br>           sum++;<br>           ans[sum] = 1;<br>           while(s[tot] == en[flag] &amp;&amp; tot&gt;=1)<br>           {<br>               ans[++sum] = 2;<br>               flag++;<br>               tot–;<br>           }<br>       }<br>       if(sum != 2*n)<br>       {<br>           printf(“No.\n”);<br>       }<br>       else<br>       {<br>           printf(“Yes.\n”);<br>           for(int i=1;i&lt;=sum;i++)<br>           {<br>               if(ans[i]==1) printf(“in\n”);<br>               else printf(“out\n”);<br>           }<br>       }<br>       n–;<br>       printf(“FINISH\n”);<br>   }<br>   return 0;<br>}</p>
+</blockquote>
+<p>T2:</p>
+<blockquote>
+<p>#include <cstdio><br>#include <iostream><br>#include<string><br>#include <cstring><br>using namespace std;<br>double str[100000],t,ans;<br>string a;<br>char symbol;<br>int tot = 0;<br>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    int n;<br>    while (1)<br>    {<br>        getline(cin, a);<br>        if(a==”0”) break;<br>        tot = 0;<br>        int len = a.size();<br>        for(int j=len;j&lt;=len+10;j++) a[j]=’.’;<br>        for(int i=0;;)<br>        {<br>            t = 0;<br>            if(tot != 0)<br>            {<br>                symbol = a[i];<br>                i += 2;<br>            }<br>            while(a[i]&lt;=’9’&amp;&amp;a[i]&gt;=’0’)<br>            {<br>                t <em>= 10;<br>                t += (a[i] - ‘0’);<br>                i++;<br>            }<br>            i–;<br>            i+=2;<br>            if(tot==0)<br>            {<br>                tot++;<br>                str[tot] = t;<br>                continue;<br>            }<br>            if(symbol==’+’)<br>            {<br>                tot++;<br>                str[tot] = t;<br>            }<br>            else if(symbol==’-‘)<br>            {<br>                tot++;<br>                str[tot] = -t;<br>            }<br>            else if(symbol==’</em>‘)<br>            {<br>                str[tot] *= t;<br>            }<br>            else if(symbol==’/‘)<br>            {<br>                str[tot] /= t;<br>            }</p>
+<pre><code>        if(a[i] == &#39;.&#39;) break;
+    &#125;
+    for(int i=1;i&lt;=tot;i++)
+    &#123;
+        ans += str[i];
+    &#125;
+    printf(&quot;%.2lf\n&quot;,ans);
+    ans = 0;
+    memset(str,0,sizeof(str));
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T3:</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstring><br>#include<cstdio><br>using namespace std;<br>int tot[110],n,m,l,r,q,sum=0;<br>struct node<br>{<br>    int num,pd;<br>}a[110][110];<br>char k;<br>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    while(scanf(“%d”,&amp;n))<br>    {<br>        sum++;<br>        memset(tot,0,sizeof(tot));<br>        l=1;<br>        r=n;<br>        if(n==0) break;<br>        for(int i=1;i&lt;=n;i++)<br>        {<br>            tot[i] = 1;<br>            a[i][1].num = i;<br>            cin&gt;&gt;k;<br>            if(k==’U’) a[i][1].pd = 0;<br>            else a[i][1].pd = 1;<br>        }<br>        for(int i=1;i&lt;=n-1;i++)<br>        {<br>            cin&gt;&gt;k;<br>            if(k==’R’)<br>            {<br>                for(int j=tot[ r ];j&gt;=1;j–)<br>                {<br>                    tot[r-1]++;<br>                    a[r][j].pd = ( a[r][j].pd + 1 ) % 2;<br>                    a[r-1][ tot[r-1] ] = a[r][j];<br>                }<br>                r–;<br>            }</p>
+<pre><code>        if(k==&#39;L&#39;)
+        &#123;
+            for(int j=tot[ l ];j&gt;=1;j--)
+            &#123;
+                tot[l+1]++;
+                a[l][j].pd = ( a[l][j].pd + 1 ) % 2;
+                a[l+1][ tot[l+1] ] = a[l][j];
+            &#125;
+            l++;
+        &#125;
+    &#125;
+    
+    scanf(&quot;%d&quot;,&amp;m);
+    printf(&quot;Pile %d\n&quot;,sum);
+    for(int i=1;i&lt;=m;i++)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;q);
+        int t = tot[r] - q + 1;
+        
+        if(a[r][t].pd==0)
+        printf(&quot;Card %d is a face up %d.\n&quot;,q,a[r][t].num);
+        else printf(&quot;Card %d is a face down %d.\n&quot;,q,a[r][t].num);
+    &#125;
+    
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+</blockquote>
+<p>T4:</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<algorithm><br>#include<cmath><br>#define LL long long<br>using namespace std;<br>struct node<br>{<br>    int x,y;<br>}v[1000001];<br>int n,m,minn[1000001],maxx[1000001];<br>int a[1000001];</p>
+<p>void getmin()<br>{<br>    int head=1,tail=0;<br>    for(int i=1;i&lt;m;i++)<br>    {<br>        while(v[tail].x &gt;= a[i] &amp;&amp; head &lt;= tail) tail–;<br>        v[++tail].x=a[i]; v[tail].y=i;<br>    }<br>    for(int i=m;i&lt;=n;i++)<br>    {<br>        while(v[tail].x &gt;= a[i] &amp;&amp; head &lt;= tail) tail–;<br>        v[++tail].x=a[i];v[tail].y=i;<br>        while(v[head].y &lt; i-m+1) head++;<br>        minn[i-m+1]=v[head].x;<br>    }<br>}<br>void getmax()<br>{<br>    int head=1;<br>    int tail=0;<br>    for(int i=1;i&lt;m;i++)<br>    {<br>        while(v[tail].x&lt;=a[i]&amp;&amp;head&lt;=tail) tail–;<br>        v[++tail].x=a[i]; v[tail].y=i;<br>    }<br>    for(int i=m;i&lt;=n;i++)<br>    {<br>        while(v[tail].x&lt;=a[i]&amp;&amp;head&lt;=tail) tail–;<br>        v[++tail].x=a[i];v[tail].y=i;<br>        while(v[head].y&lt;i-m+1) head++;<br>        maxx[i-m+1]=v[head].x;<br>    }<br>}<br>int main()<br>{<br>    scanf(“%d %d”,&amp;n,&amp;m);<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        scanf(“%d”,&amp;a[i]);<br>    }<br>    getmin();<br>    getmax();<br>    for(int i=1;i&lt;=n-m+1;i++)<br>    {<br>        printf(“%d “,minn[i]);<br>    }<br>    cout&lt;&lt;endl;<br>    for(int i=1;i&lt;=n-m+1;i++)<br>    {<br>        printf(“%d “,maxx[i]);<br>    }<br>    return 0;<br>}</p>
+</blockquote>
 
                 
             </div>
@@ -494,7 +548,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zph-exist.github.io/2021/03/31/new-blog/">http://zph-exist.github.io/2021/03/31/new-blog/</a>
+                    <a href="http://zph-exist.github.io/2021/04/17/week3/">http://zph-exist.github.io/2021/04/17/week3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -705,13 +759,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AD%A6%E4%B9%A0/">
+                <a href="/2021/04/17/week4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="线段树学习">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="week4">
                         
-                        <span class="card-title">线段树学习</span>
+                        <span class="card-title">week4</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -722,7 +776,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                         </span>
                         <span class="publish-author">
                             
@@ -739,16 +793,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/31/new-blog/">
+                <a href="/2021/04/17/STL/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="The frist blog">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="STL">
                         
-                        <span class="card-title">The frist blog</span>
+                        <span class="card-title">STL</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,7 +813,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                             </span>
                         <span class="publish-author">
                             
@@ -769,7 +823,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

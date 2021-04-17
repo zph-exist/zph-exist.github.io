@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="The frist blog, 欧阳凌烟">
+    <meta name="keywords" content="拓扑排序与迪杰斯特拉堆优化, 欧阳凌烟">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>The frist blog | 欧阳凌烟</title>
+    <title>拓扑排序与迪杰斯特拉堆优化 | 欧阳凌烟</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">The frist blog</h1>
+                    <h1 class="description center-align post-title">拓扑排序与迪杰斯特拉堆优化</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-17
                 </div>
                 
 
@@ -464,10 +464,115 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Today is a special day and it is worth commemorating. Because I open my blog and try to write my first blog artist, which is this one. </p>
-<p>I found it was wonderful to write in English, and it was also admirable to be corrected by Typora when I make mistakes. </p>
-<p>I can’t help but wonder what this blog will look like in the future, Maybe it will witness the my progress, happiness, new interest, trough period, sad, or even depraved and despair. But it is me, the real me, all right? Does it always witness something.</p>
-<p>In the end, I’d like to thanks for their technical support (┌・ω・)┌:@ jjhqwq.top @zzsqwq.cn, hope I could catch up with them soon. And thanks for the person I love @Zhaotong, thank you for everything</p>
+                <h3 id="拓扑排序与迪杰斯特拉堆优化"><a href="#拓扑排序与迪杰斯特拉堆优化" class="headerlink" title="拓扑排序与迪杰斯特拉堆优化"></a>拓扑排序与迪杰斯特拉堆优化</h3><p>拓扑排序的英文名是 Topological sorting。</p>
+<p>拓扑排序要解决的问题是给一个图的所有节点排序。、</p>
+<p>在一个DAG（有向无环图）中，我们将图中的顶点以线性方式进行排序，使得对于任何的顶点u到v的有向边（u，v） , 都可以有u在v的前面。</p>
+<p>还有给定一个 DAG，如果从i到j有边，则认为j依赖于i。如果i到 j 有路径（ 可达 ），则称j间接依赖于i。</p>
+<p>这里给出两个算法</p>
+<h4 id="Kahn算法-其实算是BFS算法"><a href="#Kahn算法-其实算是BFS算法" class="headerlink" title="Kahn算法(其实算是BFS算法)"></a>Kahn算法(其实算是BFS算法)</h4><p>初始状态下，集合S装有所有入度为的点，L是一个空列表。</p>
+<p>每次从S中取出一个点u放入L，然后将u的所有边删除，对于边(u，v),删除该边后，v的入度变为0，则将v放入S中。</p>
+<p>不断的重复以上的过程，直到S集合为空，检查图中是否存在任何边，如果有，那么图中一定存在环路，否则返回L，L中顶点的顺序就是拓扑排序的结果。</p>
+<h6 id="这里引用wikipedia的伪代码"><a href="#这里引用wikipedia的伪代码" class="headerlink" title="这里引用wikipedia的伪代码"></a>这里引用wikipedia的伪代码</h6><blockquote>
+<pre><code>L← Empty list that will contain the sorted elements
+S ← Set of all nodes with no incoming edges
+while S is non-empty do
+   remove a node n from S
+   insert n into L
+   for each node m with an edge e from n to m do
+       remove edge e from the graph
+       if m has no other incoming edges then
+           insert m into S
+if graph has edges then
+   return error (graph has at least onecycle)
+else
+   return L (a topologically sortedorder)
+</code></pre>
+</blockquote>
+<p>代码的核心在于维持一个入度为0的顶点的集合，</p>
+<p>伪代码2</p>
+<blockquote>
+<pre><code>bool toposort() &#123;
+ q = new queue();
+ for (i = 0; i &lt; n; i++)
+   if (in_deg[i] == 0) q.push(i);
+ ans = new vector();
+ while (!q.empty()) &#123;
+   u = q.pop();
+   ans.push_back(u);
+   for each edge(u, v) &#123;
+     if (--in_deg[v] == 0) q.push(v);
+   &#125;
+ &#125;
+ if (ans.size() == n) &#123;
+   for (i = 0; i &lt; n; i++)
+     std::cout &lt;&lt; ans[i] &lt;&lt; std::endl;
+   return true;
+ &#125; else &#123;
+   return false;
+ &#125;
+&#125;
+</code></pre>
+</blockquote>
+<p>DFS算法</p>
+<blockquote>
+<pre><code>vector&lt;int&gt; G[MAXN];  // vector 实现的邻接表
+int c[MAXN];          // 标志数组
+vector&lt;int&gt; topo;     // 拓扑排序后的节点
+
+bool dfs(int u) &#123;
+ c[u] = -1;
+ for (int v : G[u]) &#123;
+   if (c[v] &lt; 0)
+     return false;
+   else if (!c[v])
+     if (!dfs(v)) return false;
+ &#125;
+ c[u] = 1;
+ topo.push_back(u);
+ return true;
+&#125;
+
+bool toposort() &#123;
+ topo.clear();
+ memset(c, 0, sizeof(c));
+ for (int u = 0; u &lt; n; u++)
+   if (!c[u])
+     if (!dfs(u)) return false;
+ reverse(topo.begin(), topo.end());
+ return true;
+&#125;
+</code></pre>
+</blockquote>
+<p>这里是练习题</p>
+<h5 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h5><p>比较典型的拓扑排序， 赢的和输的连一条边，进行拓扑排序，不过需要注意字典序最小的处理</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<algorithm></p>
+<p>using namespace std;</p>
+<p>int du[N],head[N],sum=0,ans[N],len=0,n,m;<br>bool pd[N];<br>struct node<br>{<br>    int to,next;<br>}e[1000000];<br>struct node2<br>{<br>    int id;<br>    bool operator &lt; (const node2 &amp;b) const<br>    {<br>        if( du[id]!=du[b.id] )<br>        {<br>            return du[id] &gt; du[b.id];<br>        }<br>        else<br>        {<br>            return id &gt; b.id;<br>        }<br>    }<br>};<br>inline void add(int u,int v)<br>{<br>    sum++;<br>    e[sum].to = v;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>}</p>
+<p>void tuopu()<br>{<br>    priority_queue<node2>q;<br>    for(int i=1;i&lt;=n;i++)<br>    {<br>        node2 u;<br>        u.id = i;<br>        if( du[i]==0 )<br>        {<br>            q.push(u);<br>        }<br>    }<br>    while( !q.empty() )<br>    {<br>        node2 u;<br>        u = q.top();<br>        q.pop();<br>        int p = u.id;<br>        ans[ ++len ] = p;<br>        for(int i=head[p];i!=-1;i=e[i].next)<br>        {<br>            int v = e[i].to;<br>            if( pd[v]==false &amp;&amp; –du[v] == 0 )<br>            {<br>                pd[v] = true;<br>                u.id = v;<br>                q.push( u );<br>            }<br>        }<br>    }</p>
+<p>}<br>int main()<br>{<br>    freopen(“in.txt”,”r”,stdin);<br>    while( scanf(“%d %d”,&amp;n,&amp;m)!=EOF )<br>    {<br>    len = 0;<br>    sum = 0;<br>    memset(du,0,sizeof(du));<br>    memset(pd,false,sizeof(pd));<br>    memset(head,-1,sizeof(head));<br>    for(int i=1;i&lt;=m;i++)<br>    {<br>        int u,v;<br>        scanf(“%d %d”,&amp;u,&amp;v);<br>        du[v]++;<br>        add(u,v);<br>    }<br>    tuopu();<br>    for(int i=1;i&lt;len;i++)<br>    {<br>        printf(“%d “,ans[i]);<br>    }<br>    printf(“%d”,ans[len]);<br>    cout&lt;&lt;endl;<br>    }</p>
+<p>​     return 0;</p>
+<p>}</p>
+</blockquote>
+<h4 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h4><p>对于a比b大的关系，从a向b连边，拓扑排序。</p>
+<blockquote>
+<p>#include&lt;bits/stdc++.h&gt;<br>#define LL long long<br>#define INF 0x3f3f3f3f3f3f3f3f<br>using namespace std;</p>
+<p>const int N =21000;<br>LL ans;<br>int head[N],sum=0,n,m,h=0,addd=0,maxx[N];<br>bool pd[N];<br>struct node<br>{<br>   int next,to;<br>}e[N<em>2];<br>struct node2<br>{<br>   int du,id;<br>   bool operator &lt; (const node2 &amp;b) const<br>   {<br>       return du &gt; b.du;<br>   }<br>}a[N],u;<br>void add(int u,int v)<br>{<br>   sum++;<br>   e[sum].to = v;<br>   e[sum].next = head[u];<br>   head[u] = sum;<br>}<br>void work()<br>{<br>   priority_queue<node2> q;<br>   for(int i=1;i&lt;=n;i++)<br>   {<br>       if( a[i].du==0 )<br>       {<br>           u.id = i;<br>           u.du = 0;<br>           q.push( u );<br>           maxx[p] = 0;<br>//            pd[i] = true;<br>       }<br>   }<br>   while( !q.empty() )<br>   {<br>       node2 top = q.top();<br>       q.pop();<br>       int p = top.id;<br>       h++;<br>       for(int i=head[p];i!=-1;i=e[i].next)<br>       {<br>           int v = e[i].to;<br>           a[v].du–;<br>           maxx[v] = max( maxx[v],maxx[p]+1 );<br>           if( a[v].du==0 )<br>           {<br>               u.id = v;<br>               u.du = 0;<br>               q.push( u );<br>//                pd[v] = true;<br>           }<br>       }<br>   }<br>}<br>int main()<br>{<br>   while(     scanf(“%d %d”,&amp;n,&amp;m)!=EOF )<br>   {<br>   addd = 0;<br>   h = 0;<br>   sum = 0;<br>   memset(a,0,sizeof(a));<br>   memset(pd,false,sizeof(pd));<br>   memset(maxx,0,sizeof(maxx));<br>   memset(head,-1,sizeof(head));<br>   int u,v;<br>   for(int i=1;i&lt;=n;i++)<br>   {<br>       a[i].du = 0;<br>       a[i].id = i;<br>   }<br>   for(int i=1;i&lt;=m;i++)<br>   {<br>       scanf(“%d %d”,&amp;u,&amp;v);<br>       add(v,u);<br>       a[u].du++;<br>   }<br>   work();<br>   for(int i=1;i&lt;=n;i++)<br>   {<br>       addd += maxx[i];<br>   }<br>   ans = 888</em>n+addd;<br>   if( h==n ) printf(“%lld\n”,ans);<br>   else printf(“-1\n”);<br>   }</p>
+<p>​    return 0；</p>
+<p>}</p>
+</blockquote>
+<h4 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h4><p>迪杰斯特拉堆优化的模板</p>
+<blockquote>
+<p>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<cmath><br>#include<queue><br>#include<algorithm><br>#define N 100100<br>#define INF 2147483647<br>#define LL long long<br>using namespace std;</p>
+<p>LL dis[N];<br>bool pd[N];<br>struct node<br>{<br>    LL to,val,next;<br>}e[1000000];<br>struct node2<br>{<br>    LL num,zhi;<br>};<br>LL sum = 0,head[N],n,m,s;<br>inline void add(LL u,LL v,LL val)<br>{<br>    sum++;<br>    e[sum].to =v;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>    e[sum].val = val;<br>}<br>struct cmp<br>{<br>    bool operator ()(node2 x,node2 y)<br>    {<br>        return x.zhi &gt; y.zhi;<br>    }<br>};<br>void D()<br>{<br>    memset(pd,false,sizeof(pd));<br>    dis[s] = 0;<br>    node2 u,p;<br>    priority_queue&lt;node2,vector<node2>,cmp&gt;q;<br>    p.num = s;<br>    p.zhi = 0;<br>    dis[s] = 0;<br>    q.push(p);<br>    while( !q.empty() )<br>    {<br>        p = q.top();<br>        q.pop();<br>        if( pd[p.num] ) continue;<br>        pd[ p.num ] = true;<br>        dis[p.num] = p.zhi;<br>        for(int i=head[ p.num ];i!=-1;i=e[i].next )<br>        {<br>            int v = e[i].to,val = e[i].val;<br>            if( pd[v]==false &amp;&amp; dis[v] &gt; dis[p.num] + val  )<br>            {<br>                u.num = v;<br>                dis[v] = dis[p.num] + val;<br>                u.zhi = dis[v];<br>                q.push(u);<br>            }<br>        }<br>    }<br>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    memset(head,-1,sizeof(head));<br>    cin&gt;&gt;n&gt;&gt;m&gt;&gt;s;<br>    LL u,v,val;<br>    for(LL i=0;i&lt;=n;i++) dis[i] = INF;<br>    for(LL i=1;i&lt;=m;i++)<br>    {<br>        scanf(“%lld %lld %lld”,&amp;u,&amp;v,&amp;val);<br>        add(u,v,val);<br>    }<br>    D();<br>    for(LL i=1;i&lt;=n;i++)<br>    {<br>        printf(“%lld “,dis[i]);<br>    }<br>    return 0;<br>}</p>
+<p>//迪杰斯特拉 O( n<em>2 )版<br>/</em><br>#include<iostream><br>#include<cstdio><br>#include<cstring><br>#include<cmath><br>#include<algorithm><br>#define N 100100<br>#define INF 2147483647<br>#define LL long long<br>using namespace std;</p>
+<p>LL dis[N];<br>bool pd[N];<br>struct node<br>{<br>    LL to,val,next;<br>}e[1000000];<br>LL sum = 0,head[N],n,m,s;<br>inline void add(LL u,LL v,LL val)<br>{<br>    sum++;<br>    e[sum].to =v;<br>    e[sum].next = head[u];<br>    head[u] = sum;<br>    e[sum].val = val;<br>}<br>void D()<br>{<br>    memset(pd,false,sizeof(pd));<br>    dis[s] = 0;<br>    for(LL i=1;i&lt;=n;i++)<br>    {<br>        LL k = 0;<br>        for(LL j=1;j&lt;=n;j++)<br>        {<br>            if( pd[j]==false &amp;&amp; (k==0 || dis[j]&lt;dis[k]) )<br>            {<br>                k = j;<br>            }<br>        }<br>        if( k==0 ) return;<br>        pd[ k ] = true;<br>        for(LL j=head[k];j!=-1;j=e[j].next)<br>        {<br>            LL v = e[j].to,val = e[j].val;<br>            if( pd[v]==false &amp;&amp;  dis[ v ] &gt; dis[k]+val )<br>            {<br>                dis[v] = dis[k] + val;<br>            }<br>        }</p>
+<pre><code>&#125;
+</code></pre>
+<p>}</p>
+<p>int main()<br>{<br>//    freopen(“in.txt”,”r”,stdin);<br>    memset(head,-1,sizeof(head));<br>    cin&gt;&gt;n&gt;&gt;m&gt;&gt;s;<br>    LL u,v,val;<br>    for(LL i=0;i&lt;=n;i++) dis[i] = INF;<br>    for(LL i=1;i&lt;=m;i++)<br>    {<br>        scanf(“%lld %lld %lld”,&amp;u,&amp;v,&amp;val);<br>        add(u,v,val);<br>//        add(v,u,val);<br>    }<br>    D();<br>    for(LL i=1;i&lt;=n;i++)<br>    {<br>        printf(“%lld “,dis[i]);<br>    }<br>    return 0;<br>}*/ </p>
+</blockquote>
 
                 
             </div>
@@ -494,7 +599,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zph-exist.github.io/2021/03/31/new-blog/">http://zph-exist.github.io/2021/03/31/new-blog/</a>
+                    <a href="http://zph-exist.github.io/2021/04/17/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%B8%8E%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E5%A0%86%E4%BC%98%E5%8C%96/">http://zph-exist.github.io/2021/04/17/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%B8%8E%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E5%A0%86%E4%BC%98%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -705,13 +810,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/09/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AD%A6%E4%B9%A0/">
+                <a href="/2021/04/17/STL/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="线段树学习">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="STL">
                         
-                        <span class="card-title">线段树学习</span>
+                        <span class="card-title">STL</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -722,7 +827,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                         </span>
                         <span class="publish-author">
                             
@@ -739,16 +844,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/31/new-blog/">
+                <a href="/2021/04/17/%E7%9F%9B%E7%9B%BE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="The frist blog">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="矛盾">
                         
-                        <span class="card-title">The frist blog</span>
+                        <span class="card-title">矛盾</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,7 +864,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
                             </span>
                         <span class="publish-author">
                             
@@ -769,7 +874,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
